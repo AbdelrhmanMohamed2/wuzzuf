@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\LocationController;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/testing', [LocationController::class, 'index']);
+
 Route::get('/', function () {
+    Alert::success('Success Title', 'Success Message');
+
     return view('welcome');
 });
 
