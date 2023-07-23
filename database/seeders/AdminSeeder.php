@@ -14,11 +14,12 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::factory(10)->create(['role'=> 'admin']);
+        $users = User::factory(10)->create(['role' => 'admin']);
+        $admin = User::factory(1)->create(['role' => 'admin', 'email' => 'admin@wuzzuf.com'])->first();
 
-        foreach($users as $user)
-        {
-            Admin::factory(10)->create(['user_id' => $user->id]);
+        Admin::factory(1)->create(['user_id' => $admin->id]);
+        foreach ($users as $user) {
+            Admin::factory(1)->create(['user_id' => $user->id]);
         }
     }
 }

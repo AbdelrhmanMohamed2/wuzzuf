@@ -13,6 +13,22 @@ class GradeSeeder extends Seeder
      */
     public function run(): void
     {
-        Grade::factory(5)->create();
+        $grades = [
+            'Fresh Graduate',
+            'Bachelor\'s',
+            'Master\'s',
+            'PhD',
+            'Diploma',
+            'Experience',
+        ];
+
+        foreach ($grades as $grade)
+        {
+            Grade::factory(1)->create([
+                'name' => $grade,
+            ]);
+
+        }
+
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Admin\Setting;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // View::composer('*', function ($view) {
+        //     $settings = Setting::get()->pluck('value', 'key')->toArray();
+        //     $view->with('settings', (object) $settings);
+        // });
+        $settings = Setting::get()->pluck('value', 'key')->toArray();
+        View::share('settings', (object) $settings);
     }
 }
