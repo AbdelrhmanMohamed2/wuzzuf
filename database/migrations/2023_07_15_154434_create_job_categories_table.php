@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('industry_id')->constrained();
+            $table->foreignId('industry_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

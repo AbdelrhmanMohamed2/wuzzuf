@@ -2,20 +2,24 @@
 
 namespace App\Models\Admin;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Experience;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
     use HasFactory;
 
+    protected $perPage = 4;
+
+    const UPLOADED_CV = 'uploads/employees/cvs/';
+
     const ROLES = [
-        'user_id' => 'required|exists:users,id',
         'title' => 'required|string|min:2|max:200',
-        'cv_file' => 'required|file|mimes:doc,docx,pdf',
         'gender' => 'required|in:male,female',
         'birth_date' => 'required|date_format:Y-m-d',
     ];
@@ -27,6 +31,14 @@ class Employee extends Model
         'gender',
         'birth_date'
     ];
+
+    public function age() : Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($this->birth_date)->age,
+        );
+    }
+
 
 
     public function user()

@@ -11,6 +11,12 @@ class Admin extends Model
 {
     use HasFactory;
 
+    protected $perPage = 5;
+
+    protected $fillable = [
+        'user_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

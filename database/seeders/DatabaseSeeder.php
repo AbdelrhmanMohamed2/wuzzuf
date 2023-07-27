@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             AdminSeeder::class,
             SkillSeeder::class,
-            IndustrySeeder::class,
+            // IndustrySeeder::class,
             CareerLevelSeeder::class,
             JobTypeSeeder::class,
             JobCategorySeeder::class,

@@ -14,15 +14,17 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $perPage = 5;
     const ROLES = [
-        'user_id' => 'required|exists:users,id',
-        'name' => 'required|string|min:2|max:200|unique:companies,name',
-        'website' => ['required', 'regex:/^((http[s]?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,})(\/\S*)?$/', 'unique:companies,website'],
+        // 'user_id' => 'required|exists:users,id',
         'description' => 'required|string|min:8',
         'founded_at'=> 'required|date_format:Y-m-d',
         'company_size_id' => 'required|exists:company_sizes,id',
         'industry_id' => 'required|exists:industries,id',
-        'location_id' => 'required|exists:locations,id',
+        // 'location_id' => 'required|exists:locations,id',
+        'country_id' => 'required|exists:locations,id,type,country',
+        'city_id' => 'required|exists:locations,id,type,city',
+        'area_id' => 'required|exists:locations,id,type,area',
      ];
 
     protected $fillable = [
@@ -33,7 +35,7 @@ class Company extends Model
         'founded_at',
         'company_size_id',
         'industry_id',
-        'location_id',
+        'area_id',
     ];
 
     public function user()
@@ -63,6 +65,6 @@ class Company extends Model
 
     public function location()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Location::class, 'area_id');
     }
 }

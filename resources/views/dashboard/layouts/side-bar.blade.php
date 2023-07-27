@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{ asset('uploads') }}/{{ $settings->site_logo }}" alt="website logo"
+        <img src="{{ asset('uploads/images') }}/{{ $settings->site_logo }}" alt="website logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ $settings->site_name }}</span>
     </a>
@@ -16,7 +16,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="" class="d-block">{{ auth()->user()->full_name}}</a>
+                <a href="" class="d-block">{{ auth()->user()->full_name }}</a>
             </div>
         </div>
 
@@ -32,92 +32,33 @@
                 <li class="nav-header">USERS</li>
 
                 {{-- Admins --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-user-shield"></i>
-                        <p>
-                            Admins
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-users"></i>
-                                <p> All Admins</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Admin</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.admins.*' icon='fa-solid fa-user-shield' title='Admins'>
+                    <x-sidebar.sub-item route='dashboard.admins.index' icon='fa-solid fa-users' title='All Admins'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.admins.create' icon='fa-solid fa-plus' title='Add New Admin'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 {{-- Employees --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-user-tie"></i>
-                        <p>
-                            Employees
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-users"></i>
-                                <p> All Employees</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Employee</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.employees.*' icon='fa-solid fa-user-shield' title='Employees'>
+                    <x-sidebar.sub-item route='dashboard.employees.index' icon='fa-solid fa-users' title='All Employees'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.employees.create' icon='fa-solid fa-plus' title='Add New Employee'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 {{-- Companies --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-building"></i>
-                        <p>
-                            Companies
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
 
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-users"></i>
-                                <p> All Companies</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Company</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.companies.*' icon='fa-solid fa-building' title='Companies'>
+                    <x-sidebar.sub-item route='dashboard.companies.index' icon='fa-solid fa-users' title='All Companies'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.companies.create' icon='fa-solid fa-plus' title='Add New Company'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 <li class="nav-header">JOBS</li>
 
-                {{-- Jobs --}}
+                {{-- Jobs
                 <li class="nav-item">
                     <a href="" class="nav-link">
                         <i class="nav-icon fa-solid fa-briefcase"></i>
@@ -125,7 +66,7 @@
                             All Jobs
                         </p>
                     </a>
-                </li>
+                </li> --}}
 
                 {{-- Job Types --}}
                 <li class="nav-item">

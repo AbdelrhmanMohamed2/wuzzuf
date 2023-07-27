@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('front-end/plugins') }}/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('front-end/dist') }}/css/adminlte.min.css">
-    <link rel="shortcut icon" href="{{ asset('uploads') }}/{{ $settings->site_logo }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('uploads/images') }}/{{ $settings->site_logo }}" type="image/x-icon">
 
 </head>
 

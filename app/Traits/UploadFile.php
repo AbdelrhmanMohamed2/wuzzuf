@@ -4,27 +4,37 @@ namespace App\Traits;
 
 trait UploadFile
 {
-    private function uploadFile($request, $class, $old_file = null, $input_name = 'image')
+    private function uploadFile($path, $file, $old_file = null)
     {
-        if ($request->has($input_name) && !is_null($request->$input_name)) {
-            if ($old_file) {
-                $this->deleteFile($old_file, $class::UPLOAD_PATH);
-            }
-
-            $file = $request->file($input_name);
-            $file_name = time() . '-' . $file->getClientOriginalName();
-            // $file->storeAs($class::UPLOAD_PATH, $file_name);
-            $file->move(public_path($class::UPLOAD_PATH), $file_name);
+        if ($old_file != null) {
+            $this->removeFile($path, $old_file);
         }
-
-        return $file_name ?? $old_file;
+        $image_name = time() . '-' . $file->getClientOriginalName();
+        $file->move(public_path($path), $image_name);
+        return $image_name;
     }
 
-    private function deleteFile($file_name, $path)
+    private function removeFile($path, $file_name)
     {
+        $file_path = public_path($path . $file_name);
+        if (file_exists($file_path) && !str_starts_with($file_name, 'default')) {
+            unlink($file_path);
+        }
+    }
 
-        if ($file_name && $file_name != 'default_image.png' && file_exists(public_path($path . $file_name))) {
-            unlink(public_path($path . $file_name));
+    private function uploadMultipleFiles($path, $files)
+    {
+        $files_names = [];
+        foreach ($files as $file) {
+            $files_names[] = $this->uploadFile($path, $file);
+        }
+        return $files_names;
+    }
+
+    private function removeMultipleFiles($path, $files, $column_name)
+    {
+        foreach ($files as $file) {
+            $this->removeFile($path, $file[$column_name]);
         }
     }
 }

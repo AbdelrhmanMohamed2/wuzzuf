@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateAdminRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateAdminRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,10 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return array_merge(User::ROLES, [
+            'email' => 'required|email|unique:users,email,' . $this->admin->user->id ,
+            'phone' => ['required', 'regex:/^01[0-2]\d{8}$/', 'unique:users,phone,' . $this->admin->user->id ],
+            'password' => 'nullable|string|min:8|max:200|confirmed',
+        ]);
     }
 }

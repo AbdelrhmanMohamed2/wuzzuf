@@ -7,22 +7,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Location\StoreLocationRequest;
 use App\Http\Requests\Location\UpdateLocationRequest;
 use App\Models\Admin\Employee;
+use App\Traits\ApiTrait;
 
 class LocationController extends Controller
 {
+    use ApiTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $employee = Employee::where('id', 1)->first();
+        // $employee = Employee::where('id', 1)->first();
 
-        $jobs = $employee->getJobsWithCommonSkills();
-        $jobs->load(['skills', 'company']); // Nested eager loading
+        // $jobs = $employee->getJobsWithCommonSkills();
+        // $jobs->load(['skills', 'company']); // Nested eager loading
 
-        foreach ($jobs as $job) {
-            dump($job);
-        }
+        // foreach ($jobs as $job) {
+        //     dump($job);
+        // }
 
     }
 
@@ -72,5 +74,15 @@ class LocationController extends Controller
     public function destroy(Location $location)
     {
         //
+    }
+
+    public function getCities(Location $location)
+    {
+        return $this->apiResponse(data: $location->cities);
+    }
+
+    public function getAreas(Location $location)
+    {
+        return $this->apiResponse(data: $location->areas);
     }
 }

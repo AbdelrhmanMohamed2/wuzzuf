@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('company_size_id')->constrained('company_sizes');
             $table->foreignId('industry_id')->constrained();
-            $table->foreignId('location_id')->constrained();
+            $table->foreignId('area_id')->constrained('locations');
             $table->string('name')->unique();
             $table->text('description');
             $table->string('website')->unique();

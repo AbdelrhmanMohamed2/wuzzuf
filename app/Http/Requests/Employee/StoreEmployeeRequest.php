@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Employee;
 
+use App\Models\Admin\Employee;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEmployeeRequest extends FormRequest
@@ -11,7 +13,7 @@ class StoreEmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +23,12 @@ class StoreEmployeeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return array_merge(User::ROLES, Employee::ROLES, [
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|max:200|confirmed',
+            'phone' => ['required', 'regex:/^01[0-2]\d{8}$/', 'unique:users,phone'],
+            'image' => 'required|file|image|mimes:jpeg,png,jpg',
+            'cv_file' => 'required|file|mimes:doc,docx,pdf',
+        ]);
     }
 }

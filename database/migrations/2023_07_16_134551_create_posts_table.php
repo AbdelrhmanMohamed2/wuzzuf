@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->integer('reading_time');
             $table->foreignId('post_category_id')->constrained('post_categories');
-            $table->foreignId('admin_id')->constrained('admins');
+            $table->foreignId('admin_id')->nullable()->constrained('admins')->nullOnDelete();
             $table->timestamps();
         });
     }

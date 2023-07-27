@@ -16,14 +16,15 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const UPLOADED_IMAGE = 'uploads/images/';
     const ROLES = [
         'first_name' => 'required|string|min:2|max:200',
         'last_name' => 'required|string|min:2|max:200',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:8|max:200',
-        'role' => 'required|in:admin,employee,company',
-        'phone' => ['required', 'regex:/^01[0-2]\d{8}$/', 'unique:users,phone'],
-        'image' => 'required|file|image|mimes:jpeg,png,jpg'
+        // 'email' => 'required|email|unique:users,email',
+        // 'password' => 'required|string|min:8|max:200|confirmed',
+        // 'role' => 'required|in:admin,employee,company',
+        // 'phone' => ['required', 'regex:/^01[0-2]\d{8}$/', 'unique:users,phone'],
+        // 'image' => 'nullable|file|image|mimes:jpeg,png,jpg'
     ];
     /**
      * The attributes that are mass assignable.

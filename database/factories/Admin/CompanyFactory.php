@@ -24,8 +24,8 @@ class CompanyFactory extends Factory
             'website'=> fake()->url(),
             'description' => fake()->paragraph(5),
             'founded_at' => fake()->date(),
-            'company_size_id' => fake()->numberBetween(1,10),
-            'location_id' => $areas->random()->id,
+            'company_size_id' => fake()->numberBetween(1,9),
+            'area_id' => $areas->random()->id,
         ];
     }
 }
