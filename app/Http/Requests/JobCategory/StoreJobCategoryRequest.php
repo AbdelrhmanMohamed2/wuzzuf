@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\JobCategory;
 
+use App\Models\Admin\JobCategory;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreJobCategoryRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreJobCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,9 @@ class StoreJobCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return array_merge([
+            'name' => 'required|string|min:2|max:200|unique:job_categories,name',
+
+        ], JobCategory::ROLES);
     }
 }

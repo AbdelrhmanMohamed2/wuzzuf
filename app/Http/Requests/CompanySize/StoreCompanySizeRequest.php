@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\CompanySize;
 
+use App\Models\Admin\CompanySize;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCompanySizeRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreCompanySizeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,9 @@ class StoreCompanySizeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return array_merge([
+        'name' => 'required|string|min:3|max:200|unique:company_sizes,name',
+
+        ], CompanySize::ROLES);
     }
 }

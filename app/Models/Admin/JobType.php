@@ -10,9 +10,8 @@ class JobType extends Model
 {
     use HasFactory;
 
-    const ROLES = [
-        'name' => 'required|string|min:2|max:200|unique:job_types,name',
-    ];
+    protected $perPage = 5;
+
 
     protected $fillable = [
         'name'

@@ -12,7 +12,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('front-end/dist') }}/img/user2-160x160.jpg" class="img-circle elevation-2"
+                <img src="{{ asset('uploads/images/default.jpg') }}" class="img-circle elevation-2"
                     alt="User Image">
             </div>
             <div class="info">
@@ -29,7 +29,7 @@
                 <!-- Add icons to the links using the .nav-icon class
         with font-awesome or any other icon font library -->
 
-                <li class="nav-header">USERS</li>
+                <li class="nav-header">USER</li>
 
                 {{-- Admins --}}
                 <x-sidebar.main-item route='dashboard.admins.*' icon='fa-solid fa-user-shield' title='Admins'>
@@ -41,147 +41,79 @@
 
                 {{-- Employees --}}
                 <x-sidebar.main-item route='dashboard.employees.*' icon='fa-solid fa-user-shield' title='Employees'>
-                    <x-sidebar.sub-item route='dashboard.employees.index' icon='fa-solid fa-users' title='All Employees'>
+                    <x-sidebar.sub-item route='dashboard.employees.index' icon='fa-solid fa-users'
+                        title='All Employees'>
                     </x-sidebar.sub-item>
-                    <x-sidebar.sub-item route='dashboard.employees.create' icon='fa-solid fa-plus' title='Add New Employee'>
+                    <x-sidebar.sub-item route='dashboard.employees.create' icon='fa-solid fa-plus'
+                        title='Add New Employee'>
                     </x-sidebar.sub-item>
                 </x-sidebar.main-item>
 
                 {{-- Companies --}}
-
                 <x-sidebar.main-item route='dashboard.companies.*' icon='fa-solid fa-building' title='Companies'>
-                    <x-sidebar.sub-item route='dashboard.companies.index' icon='fa-solid fa-users' title='All Companies'>
+                    <x-sidebar.sub-item route='dashboard.companies.index' icon='fa-solid fa-users'
+                        title='All Companies'>
                     </x-sidebar.sub-item>
-                    <x-sidebar.sub-item route='dashboard.companies.create' icon='fa-solid fa-plus' title='Add New Company'>
+                    <x-sidebar.sub-item route='dashboard.companies.create' icon='fa-solid fa-plus'
+                        title='Add New Company'>
                     </x-sidebar.sub-item>
                 </x-sidebar.main-item>
 
-                <li class="nav-header">JOBS</li>
-
-                {{-- Jobs
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-briefcase"></i>
-                        <p>
-                            All Jobs
-                        </p>
-                    </a>
-                </li> --}}
+                <li class="nav-header">JOB</li>
 
                 {{-- Job Types --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-table-list"></i>
-                        <p>
-                            Job Types
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-list"></i>
-                                <p> All Job Types</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Job Type</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.jobTypes.*' icon='fa-solid fa-table-list' title='Job Types'>
+                    <x-sidebar.sub-item route='dashboard.jobTypes.index' icon='fa-solid fa-list' title='All Job Types'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.jobTypes.create' icon='fa-solid fa-plus'
+                        title='Add New Job Type'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 {{-- Career Levels --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-layer-group"></i>
-                        <p>
-                            Career Levels
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-briefcase"></i>
-                                <p> All Career Levels</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Career Level</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.careerLevels.*' icon='fa-solid fa-layer-group'
+                    title='Career Levels'>
+                    <x-sidebar.sub-item route='dashboard.careerLevels.index' icon='fa-solid fa-briefcase'
+                        title='All Career Levels'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.careerLevels.create' icon='fa-solid fa-plus'
+                        title='Add New Career Level'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 {{-- Industries --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-industry"></i>
-                        <p>
-                            Industries
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-leaf"></i>
-                                <p> All Industries</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Industry</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
+                <x-sidebar.main-item route='dashboard.industries.*' icon='fa-solid fa-industry' title='Industries'>
+                    <x-sidebar.sub-item route='dashboard.industries.index' icon='fa-solid fa-leaf'
+                        title='All Industries'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.industries.create' icon='fa-solid fa-plus'
+                        title='Add New Industry'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 {{-- Job Categories --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-users-gear"></i>
-                        <p>
-                            Job Categories
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                <x-sidebar.main-item route='dashboard.jobCategories.*' icon='fa-solid fa-users-gear'
+                    title='Job Categories'>
+                    <x-sidebar.sub-item route='dashboard.jobCategories.index' icon='fa-solid fa-list'
+                        title='All Job Categories'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.jobCategories.create' icon='fa-solid fa-plus'
+                        title='Add New Job Category'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-list"></i>
-                                <p> All Job Categories</p>
-                            </a>
-                        </li>
+                {{-- Company Sizes --}}
+                <x-sidebar.main-item route='dashboard.companySizes.*' icon='fa-solid fa-sack-dollar'
+                    title='Company Sizes'>
+                    <x-sidebar.sub-item route='dashboard.companySizes.index' icon='fa-solid fa-building'
+                        title='All Company Sizes'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.companySizes.create' icon='fa-solid fa-plus'
+                        title='Add New Company Size'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Job Category</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li class="nav-header">EDUCATIONS</li>
+                <li class="nav-header">EDUCATION</li>
 
                 {{-- Universities --}}
                 <li class="nav-item">
@@ -267,7 +199,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-header">POSTS</li>
+                <li class="nav-header">POST</li>
 
                 {{-- Posts Categories --}}
                 <li class="nav-item">
@@ -326,7 +258,7 @@
                 </li>
 
 
-                <li class="nav-header">OTHERS</li>
+                <li class="nav-header">OTHER</li>
 
                 {{-- Skills --}}
                 <li class="nav-item">
@@ -406,34 +338,6 @@
                             <a href="" class="nav-link">
                                 <i class="nav-icon fa-solid fa-plus"></i>
                                 <p>Add New Language</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                {{-- Company Sizes --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-sack-dollar"></i>
-                        <p>
-                            Company Sizes
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-building"></i>
-                                <p>All Company Sizes</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Company Size</p>
                             </a>
                         </li>
 

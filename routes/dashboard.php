@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\CareerLevelController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\CompanySizeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\IndustryController;
+use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\LocationController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,4 +60,51 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
         Route::get('/{location}/cities', 'getCities')->name('cities');
         Route::get('/{location}/areas', 'getAreas')->name('areas');
     });
+
+    Route::prefix('jobTypes')->controller(JobTypeController::class)->name('jobTypes.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{jobType}/edit', 'edit')->name('edit');
+        Route::put('/{jobType}', 'update')->name('update');
+        Route::delete('/{jobType}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('careerLevels')->controller(CareerLevelController::class)->name('careerLevels.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{careerLevel}/edit', 'edit')->name('edit');
+        Route::put('/{careerLevel}', 'update')->name('update');
+        Route::delete('/{careerLevel}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('industries')->controller(IndustryController::class)->name('industries.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{industry}/edit', 'edit')->name('edit');
+        Route::put('/{industry}', 'update')->name('update');
+        Route::delete('/{industry}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('jobCategories')->controller(JobCategoryController::class)->name('jobCategories.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{jobCategory}/edit', 'edit')->name('edit');
+        Route::put('/{jobCategory}', 'update')->name('update');
+        Route::delete('/{jobCategory}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('companySizes')->controller(CompanySizeController::class)->name('companySizes.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{companySize}/edit', 'edit')->name('edit');
+        Route::put('/{companySize}', 'update')->name('update');
+        Route::delete('/{companySize}', 'destroy')->name('destroy');
+    });
+
+
 });

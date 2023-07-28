@@ -9,8 +9,10 @@ class JobCategory extends Model
 {
     use HasFactory;
 
+    protected $perPage = 8;
+
     const ROLES = [
-        'name' => 'required|string|min:2|max:200|unique:job_categories,name',
+        // 'name' => 'required|string|min:2|max:200|unique:job_categories,name',
         'industry_id' => 'required|exists:industries,id',
     ];
 

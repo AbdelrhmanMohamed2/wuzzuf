@@ -30,12 +30,20 @@
                     <x-form-input col=6 name='founded_at' :value="$company->founded_at" type='date' label='Founded at'
                         placeholder='Company Founded at'>
                     </x-form-input>
-                    <x-select-box col=6 label='Company Size' name='company_size_id' :oldvalue="$company->company_size_id"
-                        default='-- Select Company Size --' :options="$company_sizes">
+                    <x-select-box col=6 label='Company Size' name='company_size_id'>
+                        <option value="">-- Select Company Size --</option>
+                        @foreach ($company_sizes as $option)
+                            <option value="{{ $option['value'] }}" @selected($option['value'] == old('company_size_id') || $option['value'] == $company->company_size_id)>{{ $option['label'] }}
+                            </option>
+                        @endforeach
                     </x-select-box>
 
-                    <x-select-box col=6 label='Industry' name='industry_id' :oldvalue="$company->industry_id"
-                        default='-- Select Industry --' :options="$industries">
+                    <x-select-box col=6 label='Industry' name='industry_id' >
+                        <option value="">-- Select Industry --</option>
+                        @foreach ($industries as $option)
+                            <option value="{{ $option['value'] }}" @selected($option['value'] == old('industry_id') || $option['value'] == $company->industry_id)>{{ $option['label'] }}
+                            </option>
+                        @endforeach
                     </x-select-box>
                     <div class="col-6">
 
@@ -73,7 +81,8 @@
                                 ])>
                                     <option value="">-- Select City --</option>
                                     @foreach ($company->location->city->country->cities as $city)
-                                        <option value="{{ $city->id }}" @selected($city->id == $company->location->city->id)>{{ $city->name }}
+                                        <option value="{{ $city->id }}" @selected($city->id == $company->location->city->id)>
+                                            {{ $city->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -91,7 +100,8 @@
                                 ])>
                                     <option value="">-- Select Area --</option>
                                     @foreach ($company->location->city->areas as $area)
-                                        <option value="{{ $area->id }}" @selected($area->id == $company->location->id)>{{ $area->name }}
+                                        <option value="{{ $area->id }}" @selected($area->id == $company->location->id)>
+                                            {{ $area->name }}
                                         </option>
                                     @endforeach
                                 </select>

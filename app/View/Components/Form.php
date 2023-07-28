@@ -17,7 +17,6 @@ class Form extends Component
         public bool|string $method = false,
         public $model = null,
         public bool $files = false,
-        public $obj = null,
     ) {
         //
     }

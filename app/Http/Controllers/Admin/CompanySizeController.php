@@ -10,59 +10,45 @@ use App\Http\Requests\CompanySize\UpdateCompanySizeRequest;
 
 class CompanySizeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $company_sizes = CompanySize::paginate();
+        return view('dashboard.pages.company_size.index', compact('company_sizes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.company_size.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCompanySizeRequest $request)
     {
-        //
+        CompanySize::create($request->validated());
+        toast('Company Size has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CompanySize $companySize)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(CompanySize $companySize)
     {
-        //
+        return view('dashboard.pages.company_size.edit', compact('companySize'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateCompanySizeRequest $request, CompanySize $companySize)
     {
-        //
+        $companySize->update($request->validated());
+        toast('Company Size has been updated successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(CompanySize $companySize)
     {
-        //
+        try {
+            $companySize->delete();
+            toast('Company Size has been deleted successfully', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toast('You cant delete Company Size', 'error');
+            return redirect()->back();
+        }
     }
 }

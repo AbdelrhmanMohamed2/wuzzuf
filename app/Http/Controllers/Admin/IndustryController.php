@@ -11,59 +11,44 @@ use App\Http\Requests\Industry\UpdateIndustryRequest;
 
 class IndustryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $industries = Industry::paginate();
+        return view('dashboard.pages.industry.index', compact('industries'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.industry.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreIndustryRequest $request)
     {
-        //
+        Industry::create($request->validated());
+        toast('Industry has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Industry $industry)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Industry $industry)
     {
-        //
+        return view('dashboard.pages.industry.edit', compact('industry'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateIndustryRequest $request, Industry $industry)
     {
-        //
-    }
+        $industry->update($request->validated());
+        toast('Industry has been updated successfully', 'success');
+        return redirect()->back();    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Industry $industry)
     {
-        //
+        try {
+            $industry->delete();
+            toast('Industry has been deleted successfully', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toast('You cant delete Industry', 'error');
+            return redirect()->back();
+        }
     }
 }

@@ -9,9 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Industry extends Model
 {
     use HasFactory;
-    const ROLES = [
-        'name' => 'required|string|min:2|max:200|unique:industries,name',
-    ];
+
+    protected $perPage = 5;
 
     protected $fillable = [
         'name',

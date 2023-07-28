@@ -24,11 +24,18 @@
                 </x-form-input>
 
 
-                <x-select-box col=6 label='Company Size' name='company_size_id' default='-- Select Company Size --'
-                    :options="$company_sizes->push(['value' => '', 'label' => '-- Select Company Size --'])">
+                <x-select-box col=6 label='Company Size' name='company_size_id'>
+                    <option value="">-- Select Company Size --</option>
+                    @foreach ($company_sizes as $option)
+                        <option value="{{ $option['value'] }}" @selected($option['value'] == old('company_size_id'))>{{ $option['label'] }}</option>
+                    @endforeach
                 </x-select-box>
 
-                <x-select-box col=6 label='Industry' name='industry_id' default='-- Select Industry --' :options="$industries->push(['value' => '', 'label' => '-- Select Industry --'])">
+                <x-select-box col=6 label='Industry' name='industry_id'>
+                    <option value="">-- Select Industry --</option>
+                    @foreach ($industries as $option)
+                        <option value="{{ $option['value'] }}" @selected($option['value'] == old('industry_id'))>{{ $option['label'] }}</option>
+                    @endforeach
                 </x-select-box>
                 <div class="col-6">
 
@@ -105,7 +112,8 @@
                 <x-file-input col=6 name='image' label='Image'></x-file-input>
 
 
-                <x-text-area col=6 :value="old('description')" name='description' placeholder='Company Description' rows=3 label='Company Description'>
+                <x-text-area col=6 :value="old('description')" name='description' placeholder='Company Description' rows=3
+                    label='Company Description'>
                 </x-text-area>
             </div>
         </x-form>

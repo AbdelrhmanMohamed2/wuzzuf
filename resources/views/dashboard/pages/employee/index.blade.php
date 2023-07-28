@@ -40,10 +40,10 @@
                                 <a href="{{ route('dashboard.employees.edit', $employee) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i> Edit</a>
 
-                                <button class="btn btn-danger" form="delete-form" type="submit"><i
+                                <button class="btn btn-danger" form="delete-form-{{ $loop->index }}" type="submit"><i
                                         class="fa-solid fa-trash"></i> Delete</button>
                                 <form action="{{ route('dashboard.employees.destroy', $employee) }}" method="post"
-                                    id="delete-form">
+                                    id="delete-form-{{ $loop->index }}">
                                     @csrf
                                     @method('delete')
                                 </form>

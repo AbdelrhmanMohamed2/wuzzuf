@@ -16,9 +16,9 @@ class SelectBox extends Component
         public string $col,
         public string $name,
         public string $label,
-        public string $default,
+        // public string $default,
         public string $oldvalue = 'default',
-        public array|Collection $options = [],
+        // public array|Collection $options = [],
     ) {
         //
     }

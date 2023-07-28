@@ -19,12 +19,10 @@
                 <div class="row">
                     <x-form-input col=6 name='title' type='text' label='Title' placeholder='Enter Title'>
                     </x-form-input>
-                    <x-select-box col=6 label='Gender' name='gender' default='-- Select Employee Gender --'
-                        :options="[
-                            ['value' => '', 'label' => '-- Select Employee Gender --'],
-                            ['value' => 'male', 'label' => 'Male'],
-                            ['value' => 'female', 'label' => 'Female'],
-                        ]">
+                    <x-select-box col=6 label='Gender' name='gender'>
+                        <option>-- Select Employee Gender --</option>
+                        <option @selected(old('gender') == 'male') value="male">Male</option>
+                        <option @selected(old('gender') == 'female') value="female">Female</option>
                     </x-select-box>
                 </div>
                 <div class="row">

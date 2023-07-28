@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\JobType;
@@ -9,59 +10,45 @@ use App\Http\Requests\JobType\UpdateJobTypeRequest;
 
 class JobTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $job_types = JobType::paginate();
+        return view('dashboard.pages.job_type.index', compact('job_types'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.job_type.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreJobTypeRequest $request)
     {
-        //
+        JobType::create($request->validated());
+        toast('Job Type has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(JobType $jobType)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(JobType $jobType)
     {
-        //
+        return view('dashboard.pages.job_type.edit', compact('jobType'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateJobTypeRequest $request, JobType $jobType)
     {
-        //
+        $jobType->update($request->validated());
+        toast('Job Type has been updated successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(JobType $jobType)
     {
-        //
+        try {
+            $jobType->delete();
+            toast('Job Type has been deleted successfully', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toast('You cant delete Job Type', 'error');
+            return redirect()->back();
+        }
     }
 }

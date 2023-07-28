@@ -9,9 +9,10 @@ class CompanySize extends Model
 {
     use HasFactory;
 
+    protected $perPage = 5;
+
     const ROLES = [
-        'range_of_employees' => 'required|string|min:3|max:200',
-        'name' => 'required|string|min:3|max:200|unique:company_sizes,name',
+        'range_of_employees' => 'required|string|min:3|max:200|regex:/^\d+\s+-\s+\d+$/',
     ];
     protected $fillable = [
         'name',

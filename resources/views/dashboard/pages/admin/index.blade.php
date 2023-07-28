@@ -36,10 +36,10 @@
                             <td>
                                 <a href="{{ route('dashboard.admins.edit', $admin) }}" class="btn btn-info"><i
                                         class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                <button class="btn btn-danger" form="delete-form" type="submit"><i
+                                <button class="btn btn-danger" form="delete-form-{{ $loop->index }}" type="submit"><i
                                         class="fa-solid fa-trash"></i> Delete</button>
                                 <form action="{{ route('dashboard.admins.destroy', $admin) }}" method="post"
-                                    id="delete-form">
+                                    id="delete-form-{{ $loop->index }}">
                                     @csrf
                                     @method('delete')
                                 </form>

@@ -10,59 +10,44 @@ use App\Http\Requests\CareerLevel\UpdateCareerLevelRequest;
 
 class CareerLevelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $career_levels = CareerLevel::paginate();
+        return view('dashboard.pages.career_level.index', compact('career_levels'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.career_level.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCareerLevelRequest $request)
     {
-        //
+        CareerLevel::create($request->validated());
+        toast('Career Level has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CareerLevel $careerLevel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(CareerLevel $careerLevel)
     {
-        //
+        return view('dashboard.pages.career_level.edit', compact('careerLevel'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateCareerLevelRequest $request, CareerLevel $careerLevel)
     {
-        //
-    }
+        $careerLevel->update($request->validated());
+        toast('Career Level has been updated successfully', 'success');
+        return redirect()->back();    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(CareerLevel $careerLevel)
     {
-        //
+        try {
+            $careerLevel->delete();
+            toast('Career Level has been deleted successfully', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toast('You cant delete Career Level', 'error');
+            return redirect()->back();
+        }
     }
 }
