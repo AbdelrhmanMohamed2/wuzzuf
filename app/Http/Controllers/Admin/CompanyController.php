@@ -18,8 +18,10 @@ class CompanyController extends Controller
 
     public function index()
     {
+        $company_sizes = CompanySize::get();
+        $industries = Industry::get();
         $companies = Company::with(['user', 'company_size', 'industry'])->paginate();
-        return view('dashboard.pages.company.index', compact('companies'));
+        return view('dashboard.pages.company.index', compact('companies', 'company_sizes', 'industries'));
     }
 
     public function create()

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\Search\CompanySearchController;
 use App\Http\Controllers\Search\EmployeeSearchController;
 use App\Http\Controllers\Search\JobSearchController;
@@ -28,6 +29,9 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
     Route::post('/login', [AdminLoginController::class, 'login'])->name('login')->withoutMiddleware(['auth', 'admin']);
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    Route::get('/profile', [AdminProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
 
     Route::prefix('admins')->controller(AdminController::class)->name('admins.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -177,8 +181,11 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
 
     Route::prefix('search')->name('search.')->group(function () {
         Route::get('/jobs/', [JobSearchController::class, 'search'])->name('jobs');
-        Route::get('/companies/', [CompanySearchController::class, 'search'])->name('companies');
         Route::get('/filter',  [JobSearchController::class, 'filterJobs'])->name('jobs.filter');
+
+        Route::get('/companies/', [CompanySearchController::class, 'search'])->name('companies');
+        Route::get('/companies/filter', [CompanySearchController::class, 'filter'])->name('companies.filter');
+
         Route::get('/employees/filter',  [EmployeeSearchController::class, 'filterEmployees'])->name('employees.filter');
     });
 });
