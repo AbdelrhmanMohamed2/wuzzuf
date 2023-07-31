@@ -6,12 +6,20 @@ use App\Http\Controllers\Admin\CareerLevelController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\CompanySizeController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DegreeController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\JobTypeController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Search\CompanySearchController;
+use App\Http\Controllers\Search\EmployeeSearchController;
+use App\Http\Controllers\Search\JobSearchController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,11 +60,27 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
     });
 
     Route::prefix('jobs')->controller(JobController::class)->name('jobs.')->group(function () {
-        Route::get('companies/{company}/jobs', 'index')->name('index');
+        Route::get('/', 'index')->name('index');
+        Route::get('companies/{company}/jobs', 'companyJobs')->name('company_jobs');
         Route::get('/{company}/jobs/{job}', 'show')->name('show')->middleware(['companyJob']);
     });
 
     Route::prefix('locations')->controller(LocationController::class)->name('locations.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create/country', 'create')->name('create.country');
+        Route::get('/create/city', 'create')->name('create.city');
+        Route::get('/create/area', 'create')->name('create.area');
+
+        Route::post('/country', 'storeCountry')->name('store.country');
+        Route::post('/city', 'storeCity')->name('store.city');
+        Route::post('/area', 'storeArea')->name('store.area');
+
+        Route::get('/{location}/edit', 'edit')->name('edit');
+        Route::put('/{location}', 'update')->name('update');
+        Route::delete('/{location}', 'destroy')->name('destroy');
+
+        Route::get('/countries', 'getCountries')->name('countries');
         Route::get('/{location}/cities', 'getCities')->name('cities');
         Route::get('/{location}/areas', 'getAreas')->name('areas');
     });
@@ -106,5 +130,55 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
         Route::delete('/{companySize}', 'destroy')->name('destroy');
     });
 
+    Route::prefix('universities')->controller(UniversityController::class)->name('universities.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{university}/edit', 'edit')->name('edit');
+        Route::put('/{university}', 'update')->name('update');
+        Route::delete('/{university}', 'destroy')->name('destroy');
+    });
 
+    Route::prefix('degrees')->controller(DegreeController::class)->name('degrees.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{degree}/edit', 'edit')->name('edit');
+        Route::put('/{degree}', 'update')->name('update');
+        Route::delete('/{degree}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('grades')->controller(GradeController::class)->name('grades.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{grade}/edit', 'edit')->name('edit');
+        Route::put('/{grade}', 'update')->name('update');
+        Route::delete('/{grade}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('skills')->controller(SkillController::class)->name('skills.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{skill}/edit', 'edit')->name('edit');
+        Route::put('/{skill}', 'update')->name('update');
+        Route::delete('/{skill}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('languages')->controller(LanguageController::class)->name('languages.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{language}/edit', 'edit')->name('edit');
+        Route::put('/{language}', 'update')->name('update');
+        Route::delete('/{language}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('search')->name('search.')->group(function () {
+        Route::get('/jobs/', [JobSearchController::class, 'search'])->name('jobs');
+        Route::get('/companies/', [CompanySearchController::class, 'search'])->name('companies');
+        Route::get('/filter',  [JobSearchController::class, 'filterJobs'])->name('jobs.filter');
+        Route::get('/employees/filter',  [EmployeeSearchController::class, 'filterEmployees'])->name('employees.filter');
+    });
 });

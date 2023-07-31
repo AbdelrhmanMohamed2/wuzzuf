@@ -2,46 +2,51 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Traits\ApiTrait;
+use App\Models\Admin\Employee;
 use App\Models\Admin\Location;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Location\StoreAreaRequest;
+use App\Http\Requests\Location\StoreCityRequest;
+use App\Http\Requests\Location\StoreCountryRequest;
 use App\Http\Requests\Location\StoreLocationRequest;
 use App\Http\Requests\Location\UpdateLocationRequest;
-use App\Models\Admin\Employee;
-use App\Traits\ApiTrait;
 
 class LocationController extends Controller
 {
     use ApiTrait;
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        // $employee = Employee::where('id', 1)->first();
-
-        // $jobs = $employee->getJobsWithCommonSkills();
-        // $jobs->load(['skills', 'company']); // Nested eager loading
-
-        // foreach ($jobs as $job) {
-        //     dump($job);
-        // }
-
+        $locations = Location::where('type', 'country')->paginate();
+        return view('dashboard.pages.location.index', compact('locations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.location.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreLocationRequest $request)
+
+    public function storeCountry(StoreCountryRequest $request)
     {
-        //
+        Location::create($request->validated());
+        toast('Country has been created successfully', 'success');
+        return redirect()->back();
+    }
+
+    public function storeCity(StoreCityRequest $request)
+    {
+        Location::create($request->validated());
+        toast('City has been created successfully', 'success');
+        return redirect()->back();
+    }
+
+    public function storeArea(StoreAreaRequest $request)
+    {
+        Location::create(['parent_id' => $request->city_id] + $request->validated());
+        toast('Area has been created successfully', 'success');
+        return redirect()->back();
     }
 
     /**
@@ -60,13 +65,11 @@ class LocationController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateLocationRequest $request, Location $location)
-    {
-        //
-    }
+
+    // public function update(UpdateLocationRequest $request, Location $location)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -84,5 +87,11 @@ class LocationController extends Controller
     public function getAreas(Location $location)
     {
         return $this->apiResponse(data: $location->areas);
+    }
+
+    public function getCountries()
+    {
+        $countries = Location::where('type', 'country')->get(['id', 'name']);
+        return $this->apiResponse(data: $countries);
     }
 }

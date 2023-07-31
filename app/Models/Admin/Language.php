@@ -9,9 +9,7 @@ class Language extends Model
 {
     use HasFactory;
 
-    const ROLES = [
-        'name' => 'required|string|min:2|max:200|unique:languages,name',
-    ];
+    protected $perPage = 5;
 
     protected $fillable = [
         'name',

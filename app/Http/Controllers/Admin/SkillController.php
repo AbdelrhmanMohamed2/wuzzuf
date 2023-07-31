@@ -11,59 +11,39 @@ use App\Http\Requests\Skill\UpdateSkillRequest;
 
 class SkillController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $skills = Skill::paginate();
+        return view('dashboard.pages.skill.index', compact('skills'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.skill.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreSkillRequest $request)
     {
-        //
+        Skill::create($request->validated());
+        toast('Skill has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Skill $skill)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Skill $skill)
     {
-        //
+        return view('dashboard.pages.skill.edit', compact('skill'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateSkillRequest $request, Skill $skill)
     {
-        //
-    }
+        $skill->update($request->validated());
+        toast('Skill has been updated successfully', 'success');
+        return redirect()->back();    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Skill $skill)
     {
-        //
+        $skill->delete();
+        toast('Skill has been deleted successfully', 'success');
+        return redirect()->back();
     }
 }

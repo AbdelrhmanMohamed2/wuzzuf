@@ -12,8 +12,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('uploads/images/default.jpg') }}" class="img-circle elevation-2"
-                    alt="User Image">
+                <img src="{{ asset('uploads/images/default.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="" class="d-block">{{ auth()->user()->full_name }}</a>
@@ -40,7 +39,7 @@
                 </x-sidebar.main-item>
 
                 {{-- Employees --}}
-                <x-sidebar.main-item route='dashboard.employees.*' icon='fa-solid fa-user-shield' title='Employees'>
+                <x-sidebar.main-item route='dashboard.employees.*' icon='fa-solid fa-user-tie' title='Employees'>
                     <x-sidebar.sub-item route='dashboard.employees.index' icon='fa-solid fa-users'
                         title='All Employees'>
                     </x-sidebar.sub-item>
@@ -60,6 +59,12 @@
                 </x-sidebar.main-item>
 
                 <li class="nav-header">JOB</li>
+
+                {{-- Job Types --}}
+                <x-sidebar.sub-item :padding="false" route='dashboard.jobs.index' icon='fa-solid fa-handshake' title='Jobs'>
+                </x-sidebar.sub-item>
+
+
 
                 {{-- Job Types --}}
                 <x-sidebar.main-item route='dashboard.jobTypes.*' icon='fa-solid fa-table-list' title='Job Types'>
@@ -116,88 +121,36 @@
                 <li class="nav-header">EDUCATION</li>
 
                 {{-- Universities --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-school-flag"></i>
-                        <p>
-                            Universities
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-school"></i>
-                                <p> All Universities</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New University</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.universities.*' icon='fa-solid fa-school-flag'
+                    title='Universities'>
+                    <x-sidebar.sub-item route='dashboard.universities.index' icon='fa-solid fa-school'
+                        title='All Universities'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.universities.create' icon='fa-solid fa-plus'
+                        title='Add New University'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 {{-- Degree Levels --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-user-graduate"></i>
-                        <p>
-                            Degree Levels
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-graduation-cap"></i>
-                                <p> All Degree Levels</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Degree Level</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.degrees.*' icon='fa-solid fa-user-graduate'
+                    title='Degree Levels'>
+                    <x-sidebar.sub-item route='dashboard.degrees.index' icon='fa-solid fa-graduation-cap'
+                        title='All Degree Levels'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.degrees.create' icon='fa-solid fa-plus'
+                        title='Add New Degree Level'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 {{-- Grades --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-book-open-reader"></i>
-                        <p>
-                            Grades
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-book-open"></i>
-                                <p> All Grades</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Grade</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.grades.*' icon='fa-solid fa-book-open-reader' title='Grades'>
+                    <x-sidebar.sub-item route='dashboard.grades.index' icon='fa-solid fa-book-open'
+                        title='All Grades'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.grades.create' icon='fa-solid fa-plus'
+                        title='Add New Grade'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
                 <li class="nav-header">POST</li>
 
@@ -261,88 +214,43 @@
                 <li class="nav-header">OTHER</li>
 
                 {{-- Skills --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-hammer"></i>
-                        <p>
-                            Skills
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                <x-sidebar.main-item route='dashboard.skills.*' icon='fa-solid fa-hammer' title='Skills'>
+                    <x-sidebar.sub-item route='dashboard.skills.index' icon='fa-solid fa-helmet-safety'
+                        title='All Skills'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.skills.create' icon='fa-solid fa-plus'
+                        title='Add New Skill'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-helmet-safety"></i>
-                                <p>All Skills</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Skill</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
 
                 {{-- Locations --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-compass"></i>
-                        <p>
-                            Locations
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                <x-sidebar.main-item route='dashboard.locations.*' icon='fa-solid fa-compass' title='Locations'>
+                    <x-sidebar.sub-item route='dashboard.locations.index' icon='fa-solid fa-globe'
+                        title='All Locations'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.locations.create.country' icon='fa-solid fa-plus'
+                        title='Add New Country'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.locations.create.city' icon='fa-solid fa-plus'
+                        title='Add New City'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.locations.create.area' icon='fa-solid fa-plus'
+                        title='Add New Area'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-globe"></i>
-                                <p>All Locations</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Location</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
 
                 {{-- Languages --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-language"></i>
-                        <p>
-                            Languages
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                <x-sidebar.main-item route='dashboard.languages.*' icon='fa-solid fa-language' title='Languages'>
+                    <x-sidebar.sub-item route='dashboard.languages.index' icon='fa-solid fa-earth-africa'
+                        title='All Languages'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.languages.create' icon='fa-solid fa-plus'
+                        title='Add New Language'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-earth-africa"></i>
-                                <p>All Languages</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Language</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
 
                 <hr>
             </ul>

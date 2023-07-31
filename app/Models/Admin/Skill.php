@@ -10,9 +10,7 @@ class Skill extends Model
 {
     use HasFactory;
 
-    const ROLES = [
-        'name' => 'required|string|min:2|max:200|unique:skills,name',
-    ];
+    protected $perPage = 5;
 
     protected $fillable = [
         'name'

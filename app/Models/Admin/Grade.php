@@ -11,9 +11,7 @@ class Grade extends Model
 {
     use HasFactory;
 
-    const ROLES = [
-        'name' => 'required|string|min:3|max:200|unique:grades,name'
-    ];
+    protected $perPage = 5;
 
     protected $fillable = [
         'name'

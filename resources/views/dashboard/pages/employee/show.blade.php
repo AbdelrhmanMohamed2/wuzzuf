@@ -39,6 +39,57 @@
                     </div>
                 </div>
             </div>
+            <!-- Education Row -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <!-- University Information -->
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <ul>
+                        <li><i class="fas fa-certificate"></i> Degree: {{ $employee->education->degree->name }}</li>
+                        <li><i class="fas fa-university"></i> In: {{ $employee->education->university->name }}</li>
+                        <li><i class="fas fa-star"></i> Grade: {{ $employee->education->grade->name }}</li>
+                        <li><i class="fas fa-book"></i> Field of Study: {{ $employee->education->field }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <!-- Skills and Languages -->
+                    <h3><i class="fas fa-tasks"></i> Skills</h3>
+                    <ul>
+                        @foreach ($employee->skills as $skill)
+                            <li><i class="fas fa-check"></i> {{ $skill->name }}</li>
+                        @endforeach
+                    </ul>
+
+                    <h3><i class="fas fa-language"></i> Languages</h3>
+                    <ul>
+                        @foreach ($employee->languages as $language)
+                            <li><i class="fas fa-globe"></i> {{ $language->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <!-- Experiences Row -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3><i class="fas fa-briefcase"></i> Work Experiences</h3>
+                    <x-table :numberOfColumns="['#', 'Job Type', 'Job Category', 'Title', 'Company', 'From', 'To', 'Status']">
+                        @foreach ($employee->experiences as $experience)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $experience->job_type->name }}</td>
+                                <td>{{ $experience->job_category->name }}</td>
+                                <td>{{ $experience->title }}</td>
+                                <td>{{ $experience->company }}</td>
+                                <td>{{ $experience->from }}</td>
+                                <td>{{ $experience->to }}</td>
+                                <td>{{ $experience->status ? 'still in that possition' : 'left it' }}</td>
+                            </tr>
+                        @endforeach
+                    </x-table>
+
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

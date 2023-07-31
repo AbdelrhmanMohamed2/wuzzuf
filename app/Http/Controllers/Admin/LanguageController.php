@@ -11,59 +11,39 @@ use App\Http\Requests\Language\UpdateLanguageRequest;
 
 class LanguageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $languages = Language::paginate();
+        return view('dashboard.pages.language.index', compact('languages'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.language.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreLanguageRequest $request)
     {
-        //
+        Language::create($request->validated());
+        toast('Language has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Language $language)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Language $language)
     {
-        //
+        return view('dashboard.pages.language.edit', compact('language'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateLanguageRequest $request, Language $language)
     {
-        //
-    }
+        $language->update($request->validated());
+        toast('Language has been updated successfully', 'success');
+        return redirect()->back();    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Language $language)
     {
-        //
+        $language->delete();
+        toast('Language has been deleted successfully', 'success');
+        return redirect()->back();
     }
 }

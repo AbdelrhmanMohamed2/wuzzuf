@@ -21,9 +21,6 @@
                         <td>{{ $job_types->firstItem() + $loop->index }}</td>
                         <td>{{ $type->name }}</td>
                         <td>
-                            {{-- <a href="{{ route('dashboard.jobs.index', $company) }}" class="btn btn-info"><i
-                                    class="fa-solid fa-briefcase"></i> Jobs</a> --}}
-
 
                             <a href="{{ route('dashboard.jobTypes.edit', $type) }}" class="btn btn-primary"><i
                                     class="fa-solid fa-pen-to-square"></i> Edit</a>

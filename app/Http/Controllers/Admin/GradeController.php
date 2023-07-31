@@ -11,59 +11,44 @@ use App\Http\Requests\Grade\UpdateGradeRequest;
 
 class GradeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $grades = Grade::paginate();
+        return view('dashboard.pages.grade.index', compact('grades'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.grade.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreGradeRequest $request)
     {
-        //
+        Grade::create($request->validated());
+        toast('Grade has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Grade $grade)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Grade $grade)
     {
-        //
+        return view('dashboard.pages.grade.edit', compact('grade'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateGradeRequest $request, Grade $grade)
     {
-        //
-    }
+        $grade->update($request->validated());
+        toast('Grade has been updated successfully', 'success');
+        return redirect()->back();    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Grade $grade)
     {
-        //
+        try {
+            $grade->delete();
+            toast('Grade has been deleted successfully', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toast('You cant delete Grade', 'error');
+            return redirect()->back();
+        }
     }
 }

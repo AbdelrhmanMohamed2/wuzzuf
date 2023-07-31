@@ -11,7 +11,7 @@ class UpdateUniversityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateUniversityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|min:3|max:200|unique:universities,name,' . $this->university->id
         ];
     }
 }

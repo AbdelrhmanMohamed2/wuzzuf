@@ -11,59 +11,44 @@ use App\Http\Requests\University\UpdateUniversityRequest;
 
 class UniversityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $universities = University::paginate();
+        return view('dashboard.pages.university.index', compact('universities'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.university.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreUniversityRequest $request)
     {
-        //
+        University::create($request->validated());
+        toast('University has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(University $university)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(University $university)
     {
-        //
+        return view('dashboard.pages.university.edit', compact('university'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateUniversityRequest $request, University $university)
     {
-        //
-    }
+        $university->update($request->validated());
+        toast('University has been updated successfully', 'success');
+        return redirect()->back();    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(University $university)
     {
-        //
+        try {
+            $university->delete();
+            toast('University has been deleted successfully', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toast('You cant delete University', 'error');
+            return redirect()->back();
+        }
     }
 }

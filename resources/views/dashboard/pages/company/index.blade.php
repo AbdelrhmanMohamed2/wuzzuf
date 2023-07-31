@@ -5,9 +5,12 @@
 @section('page_name', 'Companies')
 
 @section('css')
+    @include('dashboard.layouts.search-input-style')
 @endsection
 
 @section('content')
+    @include('dashboard.layouts.search-input')
+
     <div class="card card-lightblue">
         <div class="card-header ">
             <h3 class="card-title">All Companies</h3>
@@ -21,8 +24,8 @@
                         <td>{{ $companies->firstItem() + $loop->index }}</td>
                         <td>{{ $company->name }}</td>
                         <td>
-                            <a href="{{ route('dashboard.jobs.index', $company) }}" class="btn btn-info"><i
-                                class="fa-solid fa-briefcase"></i> Jobs</a>
+                            <a href="{{ route('dashboard.jobs.company_jobs', $company) }}" class="btn btn-info"><i
+                                    class="fa-solid fa-briefcase"></i> Jobs</a>
 
                             <a href="{{ route('dashboard.companies.show', $company) }}" class="btn btn-info"><i
                                     class="fa-solid fa-eye"></i> Show Details</a>
@@ -51,4 +54,9 @@
 @endsection
 
 @section('scripts')
+    @include('dashboard.layouts.xhr', [
+        'route' => route('dashboard.search.companies'),
+        'link' => '`/dashboard/companies/${response.data[key].id}`',
+        'label' => '`${response.data[key].name}`',
+    ])
 @endsection

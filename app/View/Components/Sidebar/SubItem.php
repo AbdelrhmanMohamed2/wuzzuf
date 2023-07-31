@@ -15,6 +15,7 @@ class SubItem extends Component
         public string $title,
         public string $route,
         public string $icon,
+        public bool $padding = true,
     )
     {
         //

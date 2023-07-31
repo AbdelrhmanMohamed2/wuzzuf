@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Employee\StoreEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
+use App\Models\Admin\Degree;
+use App\Models\Admin\Grade;
+use App\Models\Admin\Language;
 
 class EmployeeController extends Controller
 {
@@ -17,7 +20,10 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::with('user')->paginate();
-        return view('dashboard.pages.employee.index', compact('employees'));
+        $languages = Language::get();
+        $degrees = Degree::get();
+        $grades = Grade::get();
+        return view('dashboard.pages.employee.index', compact('employees', 'degrees','grades', 'languages'));
     }
 
     public function create()
@@ -43,7 +49,16 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        $employee->load('user');
+        $employee->load([
+            'user',
+            'languages',
+            'skills',
+            'education.university',
+            'education.degree',
+            'education.grade',
+            'experiences.job_type',
+            'experiences.job_category',
+        ]);
         return view('dashboard.pages.employee.show', compact('employee'));
     }
 

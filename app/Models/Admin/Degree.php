@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Degree extends Model
 {
     use HasFactory;
-    const ROLES = [
-        'name' => 'required|string|min:3|max:200|unique:degrees,name',
-    ];
+
+    protected $perPage = 5;
+
     protected $fillable = [
         'name'
     ];

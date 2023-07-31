@@ -11,9 +11,7 @@ class University extends Model
 {
     use HasFactory;
 
-    const ROLES = [
-        'name' => 'required|string|min:3|max:200|unique:universities,name'
-    ];
+    protected $perPage = 5;
 
     protected $fillable = [
         'name',

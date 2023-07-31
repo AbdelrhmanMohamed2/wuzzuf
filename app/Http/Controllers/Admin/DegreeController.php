@@ -9,59 +9,44 @@ use App\Http\Requests\Degree\UpdateDegreeRequest;
 
 class DegreeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $degrees = Degree::paginate();
+        return view('dashboard.pages.degree.index', compact('degrees'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('dashboard.pages.degree.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreDegreeRequest $request)
     {
-        //
+        Degree::create($request->validated());
+        toast('Degree has been created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Degree $degree)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Degree $degree)
     {
-        //
+        return view('dashboard.pages.degree.edit', compact('degree'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateDegreeRequest $request, Degree $degree)
     {
-        //
-    }
+        $degree->update($request->validated());
+        toast('Degree has been updated successfully', 'success');
+        return redirect()->back();    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Degree $degree)
     {
-        //
+        try {
+            $degree->delete();
+            toast('Degree has been deleted successfully', 'success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toast('You cant delete Degree', 'error');
+            return redirect()->back();
+        }
     }
 }

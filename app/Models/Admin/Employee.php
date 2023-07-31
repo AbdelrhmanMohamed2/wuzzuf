@@ -4,7 +4,7 @@ namespace App\Models\Admin;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Experience;
+use App\Models\Admin\Experience;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;

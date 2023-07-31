@@ -4,15 +4,18 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 
 class Location extends Model
 {
     use HasFactory;
 
+    protected $perPage = 5;
+
     const ROLES = [
-        'name' => 'required|string|unique:locations,name',
+        // 'name' => 'required|string|unique:locations,name',
         'type' => 'required|in:country,city,area',
-        'parent_id' => 'required|exists:locations,id',
+        // 'parent_id' => 'required|exists:locations,id',
     ];
 
     protected $fillable = [

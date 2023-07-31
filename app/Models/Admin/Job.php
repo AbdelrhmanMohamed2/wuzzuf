@@ -12,6 +12,8 @@ class Job extends Model
 {
     use HasFactory;
 
+    protected $perPage = 10;
+
     const ROLES = [
         'title' => 'required|string|max:255|min:2',
         'description' => 'required|string|min:2',
