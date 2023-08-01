@@ -6,7 +6,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="" class="nav-link">Front-End</a>
+            <a href="{{ route('home') }}" class="nav-link">Front-End</a>
         </li>
     </ul>
 
@@ -130,9 +130,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <form action="{{ route('logout')}}" method="post">
+            <form action="{{ route('logout') }}" method="post">
                 @csrf
-                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i>
+                    Logout</button>
             </form>
         </li>
         {{-- <li class="nav-item">

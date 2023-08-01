@@ -1,27 +1,27 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AdminLoginController;
-use App\Http\Controllers\Admin\CareerLevelController;
-use App\Http\Controllers\Admin\CompanyController;
-use App\Http\Controllers\Admin\CompanySizeController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DegreeController;
-use App\Http\Controllers\Admin\EmployeeController;
-use App\Http\Controllers\Admin\GradeController;
-use App\Http\Controllers\Admin\IndustryController;
-use App\Http\Controllers\Admin\JobCategoryController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\DegreeController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\JobTypeController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
-use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\UniversityController;
-use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\Search\JobSearchController;
+use App\Http\Controllers\Admin\CareerLevelController;
+use App\Http\Controllers\Admin\CompanySizeController;
+use App\Http\Controllers\Admin\JobCategoryController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Search\CompanySearchController;
 use App\Http\Controllers\Search\EmployeeSearchController;
-use App\Http\Controllers\Search\JobSearchController;
-use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->group(function () {
