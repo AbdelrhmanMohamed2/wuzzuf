@@ -7,6 +7,6 @@
             {{ $slot }}
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-info">{{ $btn }}</button>
+        <button type="submit" class="btn btn-{{ $color }}">{{ $btn }}</button>
     </div>
 </form>

@@ -8,6 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // dd('home');
         return view('front_end.index');
     }
 }

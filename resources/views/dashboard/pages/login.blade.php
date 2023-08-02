@@ -10,11 +10,11 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('front-end/plugins') }}/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('board/plugins') }}/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="{{ asset('front-end/plugins') }}/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('board/plugins') }}/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('front-end/dist') }}/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{ asset('board/dist') }}/css/adminlte.min.css">
     <link rel="shortcut icon" href="{{ asset('uploads/images') }}/{{ $settings->site_logo }}" type="image/x-icon">
 
 </head>
@@ -78,11 +78,11 @@
     <!-- /.login-box -->
 
     <!-- jQuery -->
-    <script src="{{ asset('front-end/plugins') }}/jquery/jquery.min.js"></script>
+    <script src="{{ asset('board/plugins') }}/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('front-end/plugins') }}/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('board/plugins') }}/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('front-end/dist') }}/js/adminlte.min.js"></script>
+    <script src="{{ asset('board/dist') }}/js/adminlte.min.js"></script>
 </body>
 
 </html>

@@ -20,15 +20,16 @@ use App\Http\Controllers\Admin\CareerLevelController;
 use App\Http\Controllers\Admin\CompanySizeController;
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Search\CompanySearchController;
 use App\Http\Controllers\Search\EmployeeSearchController;
 
 
 Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->group(function () {
-    Route::get('/login', [AdminLoginController::class, 'index'])->name('login-page')->withoutMiddleware(['auth', 'admin']);
-    Route::post('/login', [AdminLoginController::class, 'login'])->name('login')->withoutMiddleware(['auth', 'admin']);
+    Route::get('/login', [AdminLoginController::class, 'index'])->name('login-page')->withoutMiddleware(['auth', 'admin'])->middleware('guest');
+    Route::post('/login', [AdminLoginController::class, 'login'])->name('login')->withoutMiddleware(['auth', 'admin'])->middleware('guest');
 
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
     Route::get('/profile', [AdminProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
@@ -187,5 +188,13 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
         Route::get('/companies/filter', [CompanySearchController::class, 'filter'])->name('companies.filter');
 
         Route::get('/employees/filter',  [EmployeeSearchController::class, 'filterEmployees'])->name('employees.filter');
+    });
+
+    Route::prefix('settings')->controller(SettingController::class)->name('settings.')->group(function () {
+        Route::get('/{type}', 'index')->name('show')->middleware('settingType');
+        Route::get('/create/{type}', 'create')->name('create')->middleware('settingType');
+        Route::post('/{type}', 'store')->name('store')->middleware('createSettingType');
+        Route::put('/{setting}', 'update')->name('update');
+        Route::delete('/{setting}/{type}', 'destroy')->name('destroy')->middleware('createSettingType');
     });
 });

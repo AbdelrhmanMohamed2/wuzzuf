@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         $users = User::factory(10)->create(['role' => 'admin']);
-        $admin = User::factory(1)->create(['role' => 'admin', 'email' => 'admin@wuzzuf.com'])->first();
+        $admin = User::factory(1)->create(['role' => 'admin', 'email' => 'admin@wuzzuf.com', 'first_name' => 'Abdelrhman', 'last_name'=> 'Mohamed Essa'])->first();
 
         Admin::factory(1)->create(['user_id' => $admin->id]);
         foreach ($users as $user) {

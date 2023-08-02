@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Setting;
 
+use App\Models\Admin\Setting;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSettingRequest extends FormRequest
@@ -11,7 +13,7 @@ class StoreSettingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +23,6 @@ class StoreSettingRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return Setting::ROLES(Route::current()->parameter('type'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Setting;
 
+use App\Models\Admin\Setting;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSettingRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateSettingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,6 @@ class UpdateSettingRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return Setting::ROLES($this->setting->key);
     }
 }

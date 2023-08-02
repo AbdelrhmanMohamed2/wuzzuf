@@ -60,12 +60,10 @@
 
                 <li class="nav-header">JOB</li>
 
-                {{-- Job Types --}}
+                {{-- Jobs --}}
                 <x-sidebar.sub-item :padding="false" route='dashboard.jobs.index' icon='fa-solid fa-handshake'
                     title='Jobs'>
                 </x-sidebar.sub-item>
-
-
 
                 {{-- Job Types --}}
                 <x-sidebar.main-item route='dashboard.jobTypes.*' icon='fa-solid fa-table-list' title='Job Types'>
@@ -213,6 +211,28 @@
 
 
                 <li class="nav-header">OTHER</li>
+
+                {{-- Settings --}}
+                <x-sidebar.main-item route='dashboard.settings.*' icon='fa-solid fa-gears' title='Settings'>
+                    <x-sidebar.sub-item route='dashboard.settings.show' param="general"
+                        icon='fa-solid fa-helmet-safety' title='General'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.settings.show' param="hero" icon='fa-solid fa-feather'
+                        title='Hero'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.settings.show' param="social_links"
+                        icon='fa-brands fa-facebook' title='Social Links'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.settings.show' param="services" icon='fa-solid fa-gear'
+                        title='Services'>
+                    </x-sidebar.sub-item>
+
+                    <x-sidebar.sub-item route='dashboard.settings.show' param="footer" icon='fa-solid fa-shoe-prints'
+                        title='Footer'>
+                    </x-sidebar.sub-item>
+
+                </x-sidebar.main-item>
+
 
                 {{-- Skills --}}
                 <x-sidebar.main-item route='dashboard.skills.*' icon='fa-solid fa-hammer' title='Skills'>

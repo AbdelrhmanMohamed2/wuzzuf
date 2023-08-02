@@ -1,5 +1,5 @@
 <li @class(['nav-item', 'pl-2' => $padding])>
-    <a href="{{ route($route) }}" @class([
+    <a href="{{ route($route, $param) }}" @class([
         'nav-link',
         'active' => Route::currentRouteNamed($route),
     ])>

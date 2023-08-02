@@ -14,6 +14,7 @@ class Form extends Component
     public function __construct(
         public string $route,
         public string $btn,
+        public string $color = 'info',
         public bool|string $method = false,
         public $model = null,
         public bool $files = false,
