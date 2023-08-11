@@ -102,7 +102,6 @@ class EmployeeController extends Controller
 
     public function downloadCv(Employee $employee)
     {
-        //PDF file is stored under project/public/download/info.pdf
         $file = public_path($employee::UPLOADED_CV . $employee->cv_file);
         return Response::download($file, $employee->cv_file);
     }

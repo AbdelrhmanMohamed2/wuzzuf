@@ -1,8 +1,8 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; {{ now()->year }} {{ $settings->site_name}}.</strong>
+    <strong>Copyright &copy; {{ now()->year }} {{ $settings->where('key', 'site_name')->first()->value}}.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> {{ $settings->site_version }}
+        <b>Version</b> {{ $settings->where('key', 'site_version')->first()->value }}
     </div>
 </footer>
 

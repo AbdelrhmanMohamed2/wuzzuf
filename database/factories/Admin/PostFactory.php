@@ -19,7 +19,7 @@ class PostFactory extends Factory
         return [
             'title' => fake()->paragraph(1),
             'body' => fake()->paragraph(15),
-            'image' => 'default_image.png',
+            'image' => 'default.png',
             'reading_time' => fake()->numberBetween(1, 999),
         ];
     }

@@ -70,7 +70,7 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
         Route::get('/{company}/jobs/{job}', 'show')->name('show')->middleware(['companyJob']);
     });
 
-    Route::prefix('locations')->controller(LocationController::class)->name('locations.')->group(function () {
+    Route::prefix('locations')->controller(LocationController::class)->name('locations.')->withoutMiddleware(['auth', 'admin'])->group(function () {
         Route::get('/', 'index')->name('index');
 
         Route::get('/create/country', 'create')->name('create.country');

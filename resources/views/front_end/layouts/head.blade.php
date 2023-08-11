@@ -1,5 +1,5 @@
 <head>
-    <title>Skillhunt - Free Bootstrap 4 Template by Colorlib</title>
+    <title>{{ $settings->where('key', 'site_name')->first()->value }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="{{ asset('front_end') }}/css/flaticon.css">
     <link rel="stylesheet" href="{{ asset('front_end') }}/css/icomoon.css">
     <link rel="stylesheet" href="{{ asset('front_end') }}/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{{ asset('uploads/images') }}/{{ $settings->where('key', 'site_logo')->first()->value }}" type="image/x-icon">
+
 
     @yield('css')
 </head>

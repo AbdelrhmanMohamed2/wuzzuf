@@ -2,9 +2,9 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link">
-        <img src="{{ asset('uploads/images') }}/{{ $settings->site_logo }}" alt="website logo"
+        <img src="{{ asset('uploads/images') }}/{{ $settings->where('key', 'site_logo')->first()->value }}" alt="website logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">{{ $settings->site_name }}</span>
+        <span class="brand-text font-weight-light">{{ $settings->where('key', 'site_name')->first()->value }}</span>
     </a>
 
     <!-- Sidebar -->

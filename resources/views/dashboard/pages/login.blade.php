@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $settings->site_name }}</title>
+    <title>{{ $settings->where('key', 'site_name')->first()->value }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -15,14 +15,15 @@
     <link rel="stylesheet" href="{{ asset('board/plugins') }}/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('board/dist') }}/css/adminlte.min.css">
-    <link rel="shortcut icon" href="{{ asset('uploads/images') }}/{{ $settings->site_logo }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('uploads/images') }}/{{ $settings->where('key', 'site_logo')->first()->value }}" type="image/x-icon">
 
 </head>
 
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>{{ $settings->site_name }} </b>Dashboard</a>
+
+            <a href="../../index2.html"><b>{{ $settings->where('key', 'site_name')->first()->value }} </b>Dashboard</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

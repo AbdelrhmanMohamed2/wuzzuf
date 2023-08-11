@@ -14,10 +14,10 @@ class Experience extends Model
 
     const ROLES = [
         'title' => 'required|string|min:3|max:200',
-        'company'=> 'required|string|min:3|max:200',
-        'from'=> 'required|date',
-        'to'=> 'required|date',
-        'status'=> 'required|boolean',
+        'company' => 'required|string|min:3|max:200',
+        'from' => 'required|date',
+        'to' => 'required|date|after:from',
+        'status' => 'required|boolean',
         'job_type_id' => 'required|exists:job_types,id',
         'job_category_id' => 'required|exists:job_categories,id',
     ];
@@ -47,5 +47,4 @@ class Experience extends Model
     {
         return $this->belongsTo(JobCategory::class);
     }
-
 }

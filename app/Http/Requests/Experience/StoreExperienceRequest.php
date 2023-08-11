@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Experience;
 
+use App\Models\Admin\Experience;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreExperienceRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreExperienceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,13 @@ class StoreExperienceRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return Experience::ROLES;
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'status' => $this->status ? true : false,
+        ]);
     }
 }

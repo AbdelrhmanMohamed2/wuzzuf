@@ -9,6 +9,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    const UPLOADED_IMAGE = 'uploads/images/posts/';
+
     const ROLES = [
         'title' => 'required|string|min:3|max:200|unique:posts,title',
         'body'  => 'required|string|min:3',
