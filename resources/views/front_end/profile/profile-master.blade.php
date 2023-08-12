@@ -26,9 +26,9 @@
                 <div class="col-md-9 mx-auto">
 
                     <div class="card card-info">
-                        <div class="card-header ">
+                        {{-- <div class="card-header ">
                             <h3 class="card-title">{{ $user->full_name }}</h3>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
 
                             <div class="row">

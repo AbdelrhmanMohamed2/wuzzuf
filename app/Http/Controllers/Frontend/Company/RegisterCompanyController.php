@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Company;
 
 use App\Models\User;
 use App\Traits\UploadFile;

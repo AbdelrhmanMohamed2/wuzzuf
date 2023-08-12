@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained()->cascadeOnDelete();
             $table->foreignId('job_id')->constrained()->cascadeOnDelete();
+            $table->enum('status', ['rejected', 'accepted', 'pending'])->default('pending');
             $table->timestamps();
         });
     }

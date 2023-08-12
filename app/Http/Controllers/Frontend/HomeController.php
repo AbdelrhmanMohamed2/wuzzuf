@@ -17,8 +17,6 @@ class HomeController extends Controller
         $jobs = Job::with(['location.city.country', 'job_type', 'company'])->orderBy('created_at', 'desc')->take(20)->get();
         $companies = Company::select('id', 'name', 'user_id')->with(['user' => function($q) {return $q->select(['id', 'image']);}])->withCount('jobs')->orderBy('jobs_count', 'desc')->take(10)->get();
         $posts = Post::orderBy('created_at', 'desc')->withCount('comments')->take(4)->get();
-        // dd($posts);
-        // dd(JobCategory::select('id', 'name')->withCount('jobs')->orderBy('jobs_count', 'desc')->take(10)->get());
         return view('front_end.index', compact('job_categories', 'jobs', 'companies', 'posts'));
     }
 }

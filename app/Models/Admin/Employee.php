@@ -68,7 +68,7 @@ class Employee extends Model
 
     public function jobs()
     {
-        return $this->belongsToMany(Job::class);
+        return $this->belongsToMany(Job::class)->withPivot('status');
     }
 
     // public function getJobsWithCommonSkills()

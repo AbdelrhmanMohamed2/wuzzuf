@@ -28,7 +28,7 @@
                                 </div>
 
                                 <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                    <a href="job-single.html" class="btn btn-primary py-2">Apply Job</a>
+                                    <a href="{{ route('jobs.show', $job) }}" class="btn btn-primary py-2">Show Job Details</a>
                                 </div>
                             </div>
                         </div>
@@ -45,11 +45,11 @@
                 @foreach ($companies as $company)
                     <div class="sidebar-box ftco-animate">
                         <div class="">
-                            <a href="#" class="company-wrap"><img
+                            <a href="{{ route('companies.show', $company) }}" class="company-wrap"><img
                                     src="{{ asset($company->user::UPLOADED_IMAGE . $company->user->image) }}"
                                     class="img-fluid" alt="Colorlib Free Template"></a>
                             <div class="text p-3">
-                                <h3><a href="#">{{ $company->name }}</a></h3>
+                                <h3><a href="{{ route('companies.show', $company) }}">{{ $company->name }}</a></h3>
                                 <p><span class="number">{{ $company->jobs_count }}</span> <span>Jobs</span></p>
                             </div>
                         </div>
