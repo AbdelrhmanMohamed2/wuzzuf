@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-end justify-content-start">
                 <div class="col-md-12 ftco-animate text-center mb-5">
-                    <p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Home <i
+                    <p class="breadcrumbs mb-0"><span class="mr-3"><a href="{{ route('home') }}">Home <i
                                     class="ion-ios-arrow-forward"></i></a></span> <span>Register</span></p>
                     <h1 class="mb-3 bread">Register</h1>
                 </div>
@@ -27,11 +27,13 @@
 
                         <div class="row">
                             <div class="col">
-                                <x-frontend.text-input value='' id='name' name='name' type='text' label='Company Name'
+                                <x-frontend.text-input value='' id='name' name='name' type='text'
+                                    label='Company Name'
                                     placeholder='Please Enter Your company Name'></x-frontend.text-input>
                             </div>
                             <div class="col">
-                                <x-frontend.text-input value='' id='website' name='website' type='text' label='Company Website'
+                                <x-frontend.text-input value='' id='website' name='website' type='text'
+                                    label='Company Website'
                                     placeholder='Please Enter Your Company Website'></x-frontend.text-input>
 
                             </div>
@@ -51,8 +53,8 @@
                                 </x-frontend.select-box>
                             </div>
                             <div class="col">
-                                <x-frontend.text-input value='' id='founded_at' name='founded_at' type='date' label='Founded At'
-                                    placeholder='Founded At'></x-frontend.text-input>
+                                <x-frontend.text-input value='' id='founded_at' name='founded_at' type='date'
+                                    label='Founded At' placeholder='Founded At'></x-frontend.text-input>
                             </div>
                         </div>
 
@@ -74,7 +76,7 @@
                                         <x-frontend.select-box name='country_id' id='country_id' label='Country'>
                                             <option value="">-- Select Country --</option>
                                             @foreach ($countries as $country)
-                                                <option value="{{ $country->id }}" @selected($option->id == old('country_id'))>
+                                                <option value="{{ $country->id }}" @selected($country->id == old('country_id'))>
                                                     {{ $country->name }}</option>
                                             @endforeach
                                         </x-frontend.select-box>
@@ -98,12 +100,12 @@
 
                         <div class="row">
                             <div class="col">
-                                <x-frontend.text-input value='' id='first_name' name='first_name' type='text' label='First Name'
-                                    placeholder='Please Enter Your First Name'></x-frontend.text-input>
+                                <x-frontend.text-input value='' id='first_name' name='first_name' type='text'
+                                    label='First Name' placeholder='Please Enter Your First Name'></x-frontend.text-input>
                             </div>
                             <div class="col">
-                                <x-frontend.text-input value='' id='last_name' name='last_name' type='text' label='Last Name'
-                                    placeholder='Please Enter Your Last Name'></x-frontend.text-input>
+                                <x-frontend.text-input value='' id='last_name' name='last_name' type='text'
+                                    label='Last Name' placeholder='Please Enter Your Last Name'></x-frontend.text-input>
 
                             </div>
                         </div>
@@ -111,13 +113,13 @@
 
                         <div class="row">
                             <div class="col">
-                                <x-frontend.text-input value='' id='email' name='email' type='email' label='Email Address'
-                                    placeholder='Please Enter Your Email'></x-frontend.text-input>
+                                <x-frontend.text-input value='' id='email' name='email' type='email'
+                                    label='Email Address' placeholder='Please Enter Your Email'></x-frontend.text-input>
                             </div>
 
                             <div class="col">
-                                <x-frontend.text-input value='' id='phone' name='phone' type='text' label='Phone Number'
-                                    placeholder='Please Enter Your Phone'></x-frontend.text-input>
+                                <x-frontend.text-input value='' id='phone' name='phone' type='text'
+                                    label='Phone Number' placeholder='Please Enter Your Phone'></x-frontend.text-input>
 
                             </div>
                         </div>
@@ -130,8 +132,8 @@
                                     placeholder='Please Enter Your Password'></x-frontend.text-input>
                             </div>
                             <div class="col">
-                                <x-frontend.text-input value='' id='password_confirmation' name='password_confirmation'
-                                    type='password' label='Confirm Password'
+                                <x-frontend.text-input value='' id='password_confirmation'
+                                    name='password_confirmation' type='password' label='Confirm Password'
                                     placeholder='Confirm Password'></x-frontend.text-input>
                             </div>
                         </div>

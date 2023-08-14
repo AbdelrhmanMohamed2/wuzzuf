@@ -8,7 +8,9 @@ use App\Http\Controllers\Frontend\Job\JobController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::prefix('job')->name('jobs.')->controller(JobController::class)->group(function () {
+Route::prefix('jobs')->name('jobs.')->controller(JobController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/recommended', 'recommendedJobs')->name('recommended_jobs');
     Route::get('/{job}', 'show')->name('show');
 });
 

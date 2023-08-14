@@ -9,11 +9,12 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <x-frontend.nav-item route="home" label='Home'></x-frontend.nav-item>
-                <li class="nav-item"><a href="browsejobs.html" class="nav-link">Browse Jobs</a></li>
+                {{-- <li class="nav-item"><a href="browsejobs.html" class="nav-link">Browse Jobs</a></li> --}}
                 <li class="nav-item"><a href="candidates.html" class="nav-link">Canditates</a></li>
                 <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 
+                <x-frontend.nav-item route="jobs.index" label='Browse Jobs'></x-frontend.nav-item>
                 @admin
                     <x-frontend.nav-item route="dashboard.index" label='Dashboard'></x-frontend.nav-item>
                 @endadmin
@@ -23,6 +24,7 @@
                 @endcompany
 
                 @employee
+                <x-frontend.nav-item route="jobs.recommended_jobs" label='Recommended Jobs'></x-frontend.nav-item>
                     <x-frontend.nav-item route="profile.index" label='Profile'></x-frontend.nav-item>
                 @endemployee
 

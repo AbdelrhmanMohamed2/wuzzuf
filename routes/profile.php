@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Frontend\Company\CompanyProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\Employee\EmployeeSkillController;
@@ -47,6 +47,12 @@ Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (
             Route::get('/{experience}/edit', 'edit')->name('edit')->middleware('employeeExperience');
             Route::put('/{experience}', 'update')->name('update')->middleware('employeeExperience');
             Route::delete('/{experience}', 'destroy')->name('destroy')->middleware('employeeExperience');
+        });
+    });
+
+    Route::middleware(['company'])->prefix('company')->name('company.')->group(function () {
+        Route::controller(CompanyProfileController::class)->group(function () {
+            Route::put('/', 'update')->name('update');
         });
     });
 });
