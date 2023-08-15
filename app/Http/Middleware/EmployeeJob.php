@@ -2,12 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Admin\Employee;
+use App\Models\Admin\Job;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class CompanyJob
+class EmployeeJob
 {
     /**
      * Handle an incoming request.
@@ -16,10 +18,8 @@ class CompanyJob
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $company = $request->company ?? auth()->user()->company;
-
-        if($company->id !== $request->job->company_id)
-        {
+        $employee = $request->job->employees->where('id', $request->employee->id)->first();
+        if (!$employee) {
             throw new NotFoundHttpException();
         }
         return $next($request);

@@ -12,9 +12,11 @@ use App\Http\Requests\profile\UpdateProfileRequest;
 use App\Models\Admin\Degree;
 use App\Models\Admin\Grade;
 use App\Models\Admin\Skill;
+use App\Traits\UploadFile;
 
 class EmployeeProfileController extends Controller
 {
+    use UploadFile;
     public function update(UpdateProfileRequest $request)
     {
         $validated_data = $request->validated();

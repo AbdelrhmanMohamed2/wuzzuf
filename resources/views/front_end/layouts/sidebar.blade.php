@@ -1,4 +1,4 @@
-<nav class="col-md-3 bg-light sidebar">
+<nav class="col bg-light sidebar">
     <div class="position-sticky">
         <ul class="nav flex-column">
 
@@ -43,6 +43,19 @@
                     </a>
                 </li>
             @endemployee
+
+            @company
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profile.jobs.create') }}">
+                        <i class="fas fa-plus"></i> Post a Job
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profile.jobs.index') }}">
+                        <i class="fas fa-list"></i> Jobs
+                    </a>
+                </li>
+            @endcompany
         </ul>
     </div>
 </nav>

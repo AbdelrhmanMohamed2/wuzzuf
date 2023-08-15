@@ -24,9 +24,18 @@ class Job extends Model
         'job_category_id' => 'required|exists:job_categories,id',
         'job_type_id' => 'required|exists:job_types,id',
         'career_level_id' => 'required|exists:career_levels,id',
-      ];
+        'country_id' => 'required|exists:locations,id,type,country',
+        'city_id' => 'required|exists:locations,id,type,city',
+        'area_id' => 'required|exists:locations,id,type,area',
+
+        'skills' => 'required|array|min:1',
+        'skills.*' => 'string',
+        'languages' => 'required|array|min:1',
+        'languages.*' => 'string',
+    ];
 
     protected $fillable = [
+        'location_id',
         'title',
         'description',
         'requirements',
@@ -77,6 +86,6 @@ class Job extends Model
 
     public function employees()
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->belongsToMany(Employee::class)->withPivot('status');
     }
 }

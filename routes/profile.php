@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Frontend\Company\CandidateController;
 use App\Http\Controllers\Frontend\Company\CompanyProfileController;
+use App\Http\Controllers\Frontend\Company\JobCandidateController;
+use App\Http\Controllers\Frontend\Company\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\Employee\EmployeeSkillController;
@@ -50,9 +53,37 @@ Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (
         });
     });
 
-    Route::middleware(['company'])->prefix('company')->name('company.')->group(function () {
-        Route::controller(CompanyProfileController::class)->group(function () {
+    Route::middleware(['company'])->group(function () {
+
+        Route::controller(CompanyProfileController::class)->prefix('company')->name('company.')->group(function () {
             Route::put('/', 'update')->name('update');
+        });
+
+        Route::controller(JobController::class)->prefix('jobs')->name('jobs.')->group(function () {
+
+            Route::controller(JobController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/', 'store')->name('store');
+                Route::get('/{job}/edit', 'edit')->name('edit')->middleware('companyJob');
+                Route::put('/{job}', 'update')->name('update')->middleware('companyJob');
+                Route::delete('/{job}', 'destroy')->name('destroy')->middleware('companyJob');
+            });
+
+            Route::controller(JobCandidateController::class)->middleware('companyJob')->name('candidates.')->group(function () {
+                Route::get('/{job}/candidates', 'index')->name('index');
+                Route::get('/{job}/candidates/{employee}/accept', 'accept')->name('accept');
+                Route::get('/{job}/candidates/{employee}/reject', 'reject')->name('reject');
+            });
+
+            Route::controller(CandidateController::class)->middleware('employeeJob')->name('candidate.')->group(function () {
+                Route::get('/{job}/candidates/{employee}/profile', 'profile')->name('profile');
+                Route::get('/{job}/candidates/{employee}/skills', 'skills')->name('skills');
+                Route::get('/{job}/candidates/{employee}/education', 'education')->name('education');
+                Route::get('/{job}/candidates/{employee}/experiences', 'experiences')->name('experiences');
+                Route::get('/{job}/candidates/{employee}/languages', 'languages')->name('languages');
+                Route::get('/{job}/candidates/{employee}/cv', 'downloadCv')->name('download_cv');
+            });
         });
     });
 });

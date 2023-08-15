@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'company' => \App\Http\Middleware\IsCompany::class,
         'employee' => \App\Http\Middleware\IsEmployee::class,
         'companyJob' => \App\Http\Middleware\CompanyJob::class,
+        'employeeJob' => \App\Http\Middleware\EmployeeJob::class,
         'settingType' => \App\Http\Middleware\SettingType::class,
         'createSettingType' => \App\Http\Middleware\CreateSettingType::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

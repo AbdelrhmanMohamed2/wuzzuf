@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Job;
 
+use App\Models\Admin\Job;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreJobRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreJobRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,17 @@ class StoreJobRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return Job::ROLES;
+        // return [];
+    }
+
+    protected function prepareForValidation(): void
+    {
+
+        $this->merge([
+            'skills' => json_decode($this->skills, true),
+            'languages' => json_decode($this->input('languages'), true),
+            'location_id' => $this->input('area_id'),
+        ]);
     }
 }
