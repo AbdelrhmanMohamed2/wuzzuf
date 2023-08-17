@@ -182,32 +182,14 @@
                 </li>
 
                 {{-- Posts --}}
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa-solid fa-newspaper"></i>
-                        <p>
-                            Posts
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="pl-2 nav-item">
-                            <a href="{{ route('dashboard.posts.index') }}" class="nav-link">
-                                <i class="nav-icon fa-solid fa-paper-plane"></i>
-                                <p>All Posts</p>
-                            </a>
-                        </li>
-
-                        <li class="pl-2 nav-item">
-                            <a href="{{ route('dashboard.posts.create') }}" class="nav-link">
-                                <i class="nav-icon fa-solid fa-plus"></i>
-                                <p>Add New Post</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
+                <x-sidebar.main-item route='dashboard.posts.*' icon='fa-solid fa-newspaper' title='Posts'>
+                    <x-sidebar.sub-item route='dashboard.posts.index' icon='fa-solid fa-paper-plane'
+                        title='All Posts'>
+                    </x-sidebar.sub-item>
+                    <x-sidebar.sub-item route='dashboard.posts.create' icon='fa-solid fa-plus'
+                        title='Add New Post'>
+                    </x-sidebar.sub-item>
+                </x-sidebar.main-item>
 
 
                 <li class="nav-header">OTHER</li>

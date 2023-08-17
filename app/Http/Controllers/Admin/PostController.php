@@ -6,65 +6,61 @@ use App\Models\Admin\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
-
-
+use App\Models\Admin\PostCategory;
+use App\Traits\UploadFile;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use UploadFile;
+
     public function index()
     {
-        $posts = Post::get();
-        dd($posts);
+        $posts = Post::paginate();
+        return view('dashboard.pages.post.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $post_categories = PostCategory::get();
+        return view('dashboard.pages.post.create', compact('post_categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePostRequest $request)
     {
-        //
+        $image = $this->uploadFile(Post::UPLOADED_IMAGE, $request->image);
+        Post::create(['image' => $image] + $request->validated());
+        toast('Post created successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post)
     {
-        //
+        $post->load(['admin.user', 'post_category', 'comments.user']);
+        // dd($post->comments);
+        return view('dashboard.pages.post.show', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
-        //
+        $post_categories = PostCategory::get();
+        return view('dashboard.pages.post.edit', compact('post_categories', 'post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+
+        $image = $request->has('image') ? $this->uploadFile(Post::UPLOADED_IMAGE, $request->image, $post->image) : $post->image;
+
+        $post->update(['image' => $image] + $request->validated());
+        toast('Post updated successfully', 'success');
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
-        //
+        $this->removeFile($post::UPLOADED_IMAGE, $post->image);
+        $post->delete();
+        toast('Post has been deleted successfully', 'success');
+        return redirect()->back();
     }
 }

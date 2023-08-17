@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Post;
 
+use App\Models\Admin\Post;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
@@ -11,7 +12,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,17 @@ class StorePostRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return array_merge(Post::roles(), [
+            'title' => 'required|string|min:3|max:200|unique:posts,title',
+            'image' => 'required|file|image|mimes:jpeg,png,jpg',
+            'admin_id' => 'required|exists:admins,id',
+        ]);
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'admin_id' => auth()->user()->admin->id,
+        ]);
     }
 }

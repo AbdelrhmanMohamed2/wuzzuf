@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Rules\AllowedHtmlTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,15 +11,18 @@ class Post extends Model
     use HasFactory;
 
     const UPLOADED_IMAGE = 'uploads/images/posts/';
+    protected $perPage = 10;
 
-    const ROLES = [
-        'title' => 'required|string|min:3|max:200|unique:posts,title',
-        'body'  => 'required|string|min:3',
-        'image' => 'required|file|image|mimes:jpeg,png,jpg',
-        'reading_time' => 'required|integer|min:1|max:999',
-        'post_category_id' => 'required|exists:post_categories,id',
-        'admin_id' => 'required|exists:admins,id',
-    ];
+    public static function roles()
+    {
+        return [
+            'body'  => 'required|string|min:3|allowed_tags[h1,h2,h3,p]',
+            'body'  => ['required', 'string', 'min:3', new AllowedHtmlTags(['h1', 'h2', 'h3', 'p'])],
+            'reading_time' => 'required|integer|min:1|max:999',
+            'post_category_id' => 'required|exists:post_categories,id',
+        ];
+    }
+
     protected $fillable = [
         'admin_id',
         'title',
