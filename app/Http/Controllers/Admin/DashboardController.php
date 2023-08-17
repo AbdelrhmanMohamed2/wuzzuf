@@ -8,6 +8,7 @@ use App\Models\Admin\Post;
 use App\Models\Admin\Skill;
 use Illuminate\Http\Request;
 use App\Models\Admin\JobType;
+use App\Models\Admin\Employee;
 use App\Models\Admin\Language;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -27,6 +28,13 @@ class DashboardController extends Controller
         $jobs_count = Job::count();
         $posts_count = Post::count();
 
+        $statusCounts = DB::table('employee_job')
+            ->select('status', DB::raw('COUNT(status) as count'))
+            ->whereIn('status', ['pending', 'accepted', 'rejected'])
+            ->groupBy('status')
+            ->pluck('count', 'status');
+        // dd($statusCounts);
+
         $top5Languages = Language::with('employees', 'jobs')
             ->get()->sortBy(function ($language) {
                 return ($language->employees->count() + $language->jobs->count());
@@ -44,6 +52,7 @@ class DashboardController extends Controller
             'posts_count',
             'top5Languages',
             'top5skills',
+            'statusCounts',
         ));
     }
 }

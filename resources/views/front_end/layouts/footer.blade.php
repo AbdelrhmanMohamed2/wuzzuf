@@ -19,29 +19,26 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Employers</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="pb-1 d-block">Browse Candidates</a></li>
-                        <li><a href="#" class="pb-1 d-block">Post a Job</a></li>
-                        <li><a href="#" class="pb-1 d-block">Employer Listing</a></li>
-                        <li><a href="#" class="pb-1 d-block">Resume Page</a></li>
-                        <li><a href="#" class="pb-1 d-block">Dashboard</a></li>
-                        <li><a href="#" class="pb-1 d-block">Job Packages</a></li>
-                    </ul>
+            @company
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Companies</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ route('profile.jobs.index') }}" class="pb-1 d-block">Your Jobs</a></li>
+                            <li><a href="{{ route('profile.jobs.create') }}" class="pb-1 d-block">Post a Job</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            @endcompany
             <div class="col-md">
                 <div class="ftco-footer-widget mb-4 ml-md-4">
                     <h2 class="ftco-heading-2">Candidate</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="pb-1 d-block">Browse Jobs</a></li>
-                        <li><a href="#" class="pb-1 d-block">Submit Resume</a></li>
-                        <li><a href="#" class="pb-1 d-block">Dashboard</a></li>
-                        <li><a href="#" class="pb-1 d-block">Browse Categories</a></li>
-                        <li><a href="#" class="pb-1 d-block">My Bookmarks</a></li>
-                        <li><a href="#" class="pb-1 d-block">Candidate Listing</a></li>
+                        <li><a href="{{ route('jobs.index') }}" class="pb-1 d-block">Jobs</a></li>
+                        @employee
+                            <li><a href="{{ route('jobs.recommended_jobs') }}" class="pb-1 d-block">Recommenrd Jobs</a></li>
+                            {{-- <li><a href="{{ route('profile.ap') }}" class="pb-1 d-block">Applied Jobs</a></li> --}}
+                        @endemployee
                     </ul>
                 </div>
             </div>
@@ -49,10 +46,23 @@
                 <div class="ftco-footer-widget mb-4 ml-md-4">
                     <h2 class="ftco-heading-2">Account</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="pb-1 d-block">My Account</a></li>
-                        <li><a href="#" class="pb-1 d-block">Sign In</a></li>
-                        <li><a href="#" class="pb-1 d-block">Create Account</a></li>
-                        <li><a href="#" class="pb-1 d-block">Checkout</a></li>
+
+                        @guest
+                            <li><a href="{{ route('login') }}" class="pb-1 d-block">Login</a></li>
+                            <li><a href="{{ route('register.employee') }}" class="pb-1 d-block">Register as Employee</a>
+                            </li>
+                            <li><a href="{{ route('register.company') }}" class="pb-1 d-block">Register as Company</a></li>
+
+                        @endguest
+
+                        @auth
+
+                            <li><a href="{{ route('profile.index') }}" class="pb-1 d-block">Profile</a></li>
+                            <li><a href="{{ route('profile.edit') }}" class="pb-1 d-block">Edit Profile</a></li>
+                            @admin
+                                <li><a href="{{ route('dashboard.index') }}" class="pb-1 d-block">Dashboard</a></li>
+                            @endadmin
+                        @endauth
                     </ul>
                 </div>
             </div>

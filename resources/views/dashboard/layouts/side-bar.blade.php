@@ -193,14 +193,14 @@
                     <ul class="nav nav-treeview">
 
                         <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('dashboard.posts.index') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-paper-plane"></i>
                                 <p>All Posts</p>
                             </a>
                         </li>
 
                         <li class="pl-2 nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('dashboard.posts.create') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-plus"></i>
                                 <p>Add New Post</p>
                             </a>

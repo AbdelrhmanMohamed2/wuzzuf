@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\CareerLevelController;
 use App\Http\Controllers\Admin\CompanySizeController;
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Search\CompanySearchController;
 use App\Http\Controllers\Search\EmployeeSearchController;
@@ -41,6 +42,15 @@ Route::prefix('dashboard')->middleware(['auth', 'admin'])->name('dashboard.')->g
         Route::get('/{admin}/edit', 'edit')->name('edit');
         Route::put('/{admin}', 'update')->name('update');
         Route::delete('/{admin}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('posts')->controller(PostController::class)->name('posts.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{post}/edit', 'edit')->name('edit');
+        Route::put('/{post}', 'update')->name('update');
+        Route::delete('/{post}', 'destroy')->name('destroy');
     });
 
     Route::prefix('employees')->controller(EmployeeController::class)->name('employees.')->group(function () {

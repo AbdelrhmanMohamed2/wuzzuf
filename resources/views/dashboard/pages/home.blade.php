@@ -24,7 +24,7 @@
                 <div class="icon">
                     <i class="fa-solid fa-building"></i>
                 </div>
-                <a href="#" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.companies.index') }}" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
                 <div class="icon">
                     <i class="fa-solid fa-user-tie"></i>
                 </div>
-                <a href="#" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.employees.index') }}" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -56,7 +56,7 @@
                 <div class="icon">
                     <i class="fa-solid fa-hammer"></i>
                 </div>
-                <a href="#" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.jobs.index') }}" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -82,8 +82,17 @@
     </div>
 
     <div class="row">
+        @php
+            $job_types_names = [];
+            $job_types_counts = [];
+        @endphp
         @foreach ($types_counts as $job_type)
-            <div class="col-sm-3 col-3">
+            {{-- @dd($types_counts, $job_type) --}}
+            @php
+                $job_types_names[] = [$loop->iteration, $job_type->name];
+                $job_types_counts[] = [$loop->iteration, $job_type->jobs_count];
+            @endphp
+            <div class="col">
                 <div class="description-block border-right">
                     <h5 class="description-header">{{ $job_type->jobs_count }}</h5>
                     <span class="description-text">{{ $job_type->name }}</span>
@@ -91,6 +100,53 @@
                 <!-- /.description-block -->
             </div>
         @endforeach
+
+        {{-- @dump($job_types_names, $job_types_counts) --}}
+
+    </div>
+    <div class="row">
+        <div class="col m-2 card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="far fa-chart-bar"></i>
+                    Job Types
+                </h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="job-type" style="height: 300px;"></div>
+            </div>
+            <!-- /.card-body-->
+        </div>
+        <div class="col m-2 card card-warning card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="far fa-chart-bar"></i>
+                    Job candidates
+                </h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="bar-chart" style="height: 300px;"></div>
+            </div>
+            <!-- /.card-body-->
+        </div>
 
     </div>
 
@@ -161,13 +217,13 @@
 
 
     </div>
-    {{-- @dd($top5skills[0]->jobs()->count()) --}}
+    {{-- @dd($statusCounts) --}}
 @endsection
 
 
 @section('scripts')
-    <script>
 
+    <script>
         top5skills = {!! $top5skills !!};
         skills_names = [];
         skills_counters = [];
@@ -216,7 +272,7 @@
                 labels: languages_names,
                 datasets: [{
                     data: languages_counters,
-                    backgroundColor: ['#f56954', '#00a65a', '#f39c12',  '#00c0ef', '#3c8dbc'],
+                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc'],
                 }]
             }
             var pieLangCanvas = $('#pieLang').get(0).getContext('2d')
@@ -230,6 +286,82 @@
                 data: pieData,
                 options: pieOptions
             })
+
+        })
+    </script>
+    <script src="{{ asset('board/') }}/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('board/') }}/plugins/flot/jquery.flot.js"></script>
+    <script>
+        $(function() {
+
+            var bar_data = {
+                data: [
+                    [1,
+                        {{ $statusCounts['accepted'] + $statusCounts['rejected'] + $statusCounts['pending'] }}
+                    ],
+                    [2, {{ $statusCounts['pending'] }}],
+                    [3, {{ $statusCounts['accepted'] }}],
+                    [4, {{ $statusCounts['rejected'] }}],
+                ],
+                bars: {
+                    show: true
+                }
+            }
+            $.plot('#bar-chart', [bar_data], {
+                grid: {
+                    borderWidth: 1,
+                    borderColor: '#f3f3f3',
+                    tickColor: '#f3f3f3'
+                },
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.5,
+                        align: 'center',
+                    },
+                },
+                colors: ['#ffc107'],
+                xaxis: {
+                    ticks: [
+                        [1, 'Total'],
+                        [2, 'Pending'],
+                        [3, 'Accepted'],
+                        [4, 'Rejected'],
+
+                    ]
+                }
+            })
+
+
+        })
+
+        $(function() {
+
+            var bar_data = {
+                data: {!! json_encode($job_types_counts) !!},
+                bars: {
+                    show: true
+                }
+            }
+            $.plot('#job-type', [bar_data], {
+                grid: {
+                    borderWidth: 1,
+                    borderColor: '#f3f3f3',
+                    tickColor: '#f3f3f3'
+                },
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.5,
+                        align: 'center',
+                    },
+                },
+                colors: ['#28a745'],
+                xaxis: {
+                    ticks: {!! json_encode($job_types_names) !!}
+                }
+            })
+
 
         })
     </script>

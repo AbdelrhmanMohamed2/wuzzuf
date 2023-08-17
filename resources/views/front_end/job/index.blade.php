@@ -32,7 +32,8 @@
                                                 <div class="icon"><span class="icon-briefcase"></span>
                                                 </div>
                                                 <input type="text" name='search' class="form-control"
-                                                    placeholder="eg. Garphic. Web Developer" value='{{ request()->search }}'>
+                                                    placeholder="eg. Garphic. Web Developer"
+                                                    value='{{ request()->search }}'>
                                             </div>
                                         </div>
                                     </div>
@@ -44,7 +45,7 @@
                                         </div>
                                     </div> --}}
                                 </div>
-                            {{-- </form> --}}
+                                {{-- </form> --}}
                         </div>
                     </div>
                 </div>
@@ -53,7 +54,7 @@
                 <div class="col-lg-9 pr-lg-4">
                     <div class="row">
 
-                        @foreach ($jobs as $job)
+                        @forelse ($jobs as $job)
                             <div class="col-md-12 ftco-animate">
                                 <div class="job-post-item p-4 d-block d-lg-flex align-items-center">
                                     <div class="one-third mb-4 mb-md-0">
@@ -79,7 +80,14 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="row m-5">
+
+                                <div class="alert alert-danger">
+                                    No Job Found.
+                                </div>
+                            </div>
+                        @endforelse
 
 
                     </div>
@@ -124,6 +132,11 @@
                                         {{ $option->name }}</option>
                                 @endforeach
                             </x-frontend.select-box>
+                        </div>
+
+                        <div class="sidebar-box bg-white p-4 ftco-animate">
+                            <x-frontend.text-input :value="request()->location" id='location' name='location' type='text'
+                                label='Location' placeholder='Enter Location'></x-frontend.text-input>
                         </div>
                         <button class="btn btn-info col" type="submit">Filter</button>
                     </form>

@@ -7,9 +7,10 @@ use App\Models\Admin\Job;
 use Illuminate\Http\Request;
 use App\Models\Admin\JobType;
 use App\Models\Admin\Industry;
+use App\Models\Admin\Location;
+use App\Models\Admin\CareerLevel;
 use App\Models\Admin\JobCategory;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\CareerLevel;
 
 class JobController extends Controller
 {
@@ -33,6 +34,7 @@ class JobController extends Controller
         $job_type = $request->job_type;
         $career_level = $request->career_level;
         $search = $request->search;
+        $location = $request->location;
 
         if ($search) {
             $query->where('title', 'LIKE', '%' . $search . '%');
@@ -48,6 +50,23 @@ class JobController extends Controller
 
         if ($career_level) {
             $query->where('career_level_id', $career_level);
+        }
+
+        if ($location) {
+            $locations = Location::where('name', 'like', '%' . $location . '%')->get();
+            $locations_ids = [];
+            foreach ($locations as $loc) {
+                if ($loc->type == 'country') {
+                    foreach ($loc->cities as $city) {
+                        $locations_ids = array_merge($locations_ids, $city->areas->pluck('id')->toArray());
+                    }
+                } elseif ($loc->type == 'city') {
+                    $locations_ids = array_merge($locations_ids, $loc->areas->pluck('id')->toArray());
+                } else {
+                    $locations_ids[] = $loc->id;
+                }
+            }
+            $query->whereIn('location_id', $locations_ids);
         }
         $jobs = $query->paginate();
         $jobs->load(['location.city.country', 'job_type', 'company']);
@@ -83,8 +102,5 @@ class JobController extends Controller
         $jobs = auth()->user()->employee->getJobsWithCommonSkills();
         $jobs->load(['location.city.country', 'job_type', 'company']);
         return view('front_end.job.recommended', compact('jobs'));
-        // dd($jobs);
-
-
     }
 }
