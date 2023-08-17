@@ -9,10 +9,8 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <x-frontend.nav-item route="home" label='Home'></x-frontend.nav-item>
-                {{-- <li class="nav-item"><a href="browsejobs.html" class="nav-link">Browse Jobs</a></li> --}}
-                <li class="nav-item"><a href="candidates.html" class="nav-link">Canditates</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <x-frontend.nav-item route="blog.index" label='Blog'></x-frontend.nav-item>
+                {{-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> --}}
 
                 <x-frontend.nav-item route="jobs.index" label='Browse Jobs'></x-frontend.nav-item>
                 @admin
@@ -41,9 +39,6 @@
                         </form>
                     </li>
                 @endauth
-                <li class="nav-item cta mr-md-1"><a href="new-post.html" class="nav-link">Post a Job</a></li>
-                <li class="nav-item cta cta-colored"><a href="job-post.html" class="nav-link">Want a Job</a></li>
-
             </ul>
         </div>
     </div>

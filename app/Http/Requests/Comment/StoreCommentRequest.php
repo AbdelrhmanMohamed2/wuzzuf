@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Comment;
 
+use App\Models\Admin\Comment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCommentRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,17 @@ class StoreCommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return array_merge(Comment::ROLES, [
+            'user_id' => 'required|exists:users,id',
+            'post_id' => 'required|exists:posts,id',
+        ]);
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id' => auth()->id(),
+            'post_id' => $this->post->id
+        ]);
     }
 }

@@ -11,7 +11,7 @@ class Post extends Model
     use HasFactory;
 
     const UPLOADED_IMAGE = 'uploads/images/posts/';
-    protected $perPage = 10;
+    protected $perPage = 8;
 
     public static function roles()
     {

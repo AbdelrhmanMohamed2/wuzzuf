@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Frontend\ApplyJobController;
+use App\Http\Controllers\Frontend\Blog\BlogController;
+use App\Http\Controllers\Frontend\Blog\CommentController;
 use App\Http\Controllers\Frontend\Company\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
@@ -23,6 +25,17 @@ Route::prefix('applications')->name('applications.')->middleware(['auth', 'emplo
     Route::get('/', 'index')->name('index');
     Route::get('/{job}', 'apply')->name('apply');
     Route::get('/{job}/cancel', 'cancel')->name('cancel');
+});
+
+Route::prefix('blog')->name('blog.')->controller(BlogController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{post}', 'show')->name('show');
+});
+
+Route::name('comments.')->controller(CommentController::class)->group(function () {
+    Route::post('/blog/{post}/comments', 'store')->name('store');
+    Route::put('/blog/{post}/comments/{comment}', 'update')->name('update')->middleware(['commentPost', 'commentUser']);
+    Route::delete('/blog/{post}/comments/{comment}', 'destroy')->name('destroy')->middleware(['commentPost', 'commentUser']);
 });
 
 require __DIR__ . '/auth.php';

@@ -63,6 +63,7 @@
                                 <li><a href="{{ route('dashboard.index') }}" class="pb-1 d-block">Dashboard</a></li>
                             @endadmin
                         @endauth
+                        <li><a href="{{ route('blog.index') }}" class="pb-1 d-block">Blog</a></li>
                     </ul>
                 </div>
             </div>

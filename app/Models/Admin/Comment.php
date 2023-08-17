@@ -12,8 +12,7 @@ class Comment extends Model
     use HasFactory;
 
     const ROLES = [
-        'user_id' => 'required|exists:users,id',
-        'post_id' => 'required|exists:posts,id',
+
         'body' => 'required|string|min:3',
     ];
 

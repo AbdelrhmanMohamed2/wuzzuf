@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         'employee' => \App\Http\Middleware\IsEmployee::class,
         'companyJob' => \App\Http\Middleware\CompanyJob::class,
         'commentPost' => \App\Http\Middleware\CommentPost::class,
+        'commentUser' => \App\Http\Middleware\CommentUser::class,
         'employeeJob' => \App\Http\Middleware\EmployeeJob::class,
         'settingType' => \App\Http\Middleware\SettingType::class,
         'createSettingType' => \App\Http\Middleware\CreateSettingType::class,

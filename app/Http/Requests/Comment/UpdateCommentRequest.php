@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Comment;
 
+use App\Models\Admin\Comment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCommentRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,6 @@ class UpdateCommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return Comment::ROLES;
     }
 }
