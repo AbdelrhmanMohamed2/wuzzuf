@@ -14,7 +14,7 @@
     @include('front_end.layouts.jobs')
 
 
-
+{{--
     <section class="ftco-section testimony-section">
         <div class="container">
             <div class="row justify-content-center mb-4">
@@ -110,7 +110,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- <section class="ftco-section ftco-candidates bg-primary">
         <div class="container">
@@ -175,7 +175,7 @@
 
     @include('front_end.layouts.blog')
 
-    <section class="ftco-section-parallax">
+    {{-- <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">
                 <div class="row d-flex justify-content-center">
@@ -197,7 +197,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection
 
 @section('scripts')

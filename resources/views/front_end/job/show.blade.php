@@ -92,12 +92,12 @@
                                             <h4>Apply for the job</h4>
                                             @if ($applied_before)
                                                 <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                                    <a href="{{ route('applications.cancel', $job) }}"
+                                                    <a href="{{ route('profile.applications.cancel', $job) }}"
                                                         class="btn btn-danger py-2">Cancel</a>
                                                 </div>
                                             @else
                                                 <div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-                                                    <a href="{{ route('applications.apply', $job) }}"
+                                                    <a href="{{ route('profile.applications.apply', $job) }}"
                                                         class="btn btn-primary py-2">Apply Now</a>
                                                 </div>
                                             @endif

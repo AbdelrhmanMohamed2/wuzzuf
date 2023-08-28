@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\EmployeeAppliedToJob;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Job;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class ApplyJobController extends Controller
             toast('You Already Have been applied to this job before', 'error');
         } else {
             auth()->user()->employee->jobs()->attach($job);
+            event(new EmployeeAppliedToJob($job, auth()->user()->employee, $job->company));
             toast('You have been applied to this job successfully, wait for email from the company for any updates', 'success');
         }
         return redirect()->back();

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Frontend\Company;
 
+use App\Events\EmployeeRejected;
+use App\Events\EmployeeAccepted;
 use App\Models\Admin\Job;
 use Illuminate\Http\Request;
 use App\Models\Admin\Employee;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Job\AcceptJobRequest;
 
 class JobCandidateController extends Controller
 {
@@ -16,15 +19,21 @@ class JobCandidateController extends Controller
         return view('front_end.company.candidates.index', compact('job', 'employees'));
     }
 
-    public function accept(Job $job, Employee $employee)
+    public function acceptPage (Job $job, Employee $employee)
+    {
+        return view('front_end.company.candidates.candidate.accept-email', compact('employee', 'job'));
+    }
+
+    public function accept(Job $job, Employee $employee, AcceptJobRequest $request)
     {
         if ($job->employees()->where('employee_id', $employee->id)->first()->pivot->status == 'pending') {
             $job->employees()->updateExistingPivot($employee->id, ['status' => 'accepted']);
             toast('employee accepted', 'success');
+            event(new EmployeeAccepted($job, $employee, $request->email));
         } else {
-            toast('can not change status of employee', 'error');
+            toast('can not change status of employee or send another email.', 'error');
         }
-        return redirect()->back();
+        return redirect()->route('profile.jobs.candidates.index', $job);
     }
 
     public function reject(Job $job, Employee $employee)
@@ -32,6 +41,7 @@ class JobCandidateController extends Controller
         if ($job->employees()->where('employee_id', $employee->id)->first()->pivot->status == 'pending') {
             $job->employees()->updateExistingPivot($employee->id, ['status' => 'rejected']);
             toast('employee rejected', 'success');
+            event(new EmployeeRejected($job, $employee));
         } else {
             toast('can not change status of employee', 'error');
         }

@@ -15,7 +15,7 @@
             </li>
             @employee
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('applications.index') }}">
+                    <a class="nav-link" href="{{ route('profile.applications.index') }}">
                         <i class="fas fa-list"></i> Applied Jobs
                     </a>
                 </li>

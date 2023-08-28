@@ -16,3 +16,18 @@
 @include('sweetalert::alert')
 
 @yield('scripts')
+
+@auth
+    <script>
+        // var user_id = '13'
+        // console.log(user_id);
+         user_id = '{{ auth()->id() }}'
+        // console.log(user_id);
+        var all_notifications_url = '{{ route('notifications.index') }}'
+        var mark_read_url = '{{ route('notifications.mark_read') }}'
+    </script>
+
+    <script src="{{ asset('board/dist/js/notification.js') }}"></script>
+    @vite(['resources/js/pusher-notification.js'])
+
+@endauth

@@ -1,14 +1,20 @@
 <?php
 
-use App\Http\Controllers\Frontend\ApplyJobController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\Job\JobController;
 use App\Http\Controllers\Frontend\Blog\BlogController;
 use App\Http\Controllers\Frontend\Blog\CommentController;
 use App\Http\Controllers\Frontend\Company\CompanyController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\Job\JobController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('notifications')->controller(NotificationController::class)->name('notifications.')->middleware('auth')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/mark-read/{id?}', 'markNotification')->name('mark_read');
+});
+
 
 Route::prefix('jobs')->name('jobs.')->controller(JobController::class)->group(function () {
     Route::get('/', 'index')->name('index');
@@ -21,11 +27,6 @@ Route::prefix('companies')->name('companies.')->controller(CompanyController::cl
     Route::get('/{company}/jobs', 'jobs')->name('jobs');
 });
 
-Route::prefix('applications')->name('applications.')->middleware(['auth', 'employee'])->controller(ApplyJobController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/{job}', 'apply')->name('apply');
-    Route::get('/{job}/cancel', 'cancel')->name('cancel');
-});
 
 Route::prefix('blog')->name('blog.')->controller(BlogController::class)->group(function () {
     Route::get('/', 'index')->name('index');

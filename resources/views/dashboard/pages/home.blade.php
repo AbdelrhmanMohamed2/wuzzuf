@@ -24,7 +24,8 @@
                 <div class="icon">
                     <i class="fa-solid fa-building"></i>
                 </div>
-                <a href="{{ route('dashboard.companies.index') }}" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.companies.index') }}" class="small-box-footer">Show All <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -40,7 +41,8 @@
                 <div class="icon">
                     <i class="fa-solid fa-user-tie"></i>
                 </div>
-                <a href="{{ route('dashboard.employees.index') }}" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.employees.index') }}" class="small-box-footer">Show All <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -56,7 +58,8 @@
                 <div class="icon">
                     <i class="fa-solid fa-hammer"></i>
                 </div>
-                <a href="{{ route('dashboard.jobs.index') }}" class="small-box-footer">Show All <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.jobs.index') }}" class="small-box-footer">Show All <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -297,11 +300,11 @@
             var bar_data = {
                 data: [
                     [1,
-                        {{ $statusCounts['accepted'] + $statusCounts['rejected'] + $statusCounts['pending'] }}
+                        {{ ($statusCounts['accepted'] ?? 0) + ($statusCounts['rejected'] ?? 0) + ($statusCounts['pending'] ?? 0) }}
                     ],
-                    [2, {{ $statusCounts['pending'] }}],
-                    [3, {{ $statusCounts['accepted'] }}],
-                    [4, {{ $statusCounts['rejected'] }}],
+                    [2, {{ $statusCounts['pending'] ?? 0 }}],
+                    [3, {{ $statusCounts['accepted'] ?? 0 }}],
+                    [4, {{ $statusCounts['rejected'] ?? 0 }}],
                 ],
                 bars: {
                     show: true

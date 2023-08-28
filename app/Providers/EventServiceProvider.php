@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\CompanyRegisterer;
+use App\Events\EmployeeAppliedToJob;
+use App\Events\EmployeeRejected;
+use App\Events\EmployeeAccepted;
+use App\Listeners\EmployeeJobRejected;
+use App\Listeners\JobStatusAccepted;
+use App\Listeners\NewCompanyRegister;
+use App\Listeners\NewEmployeeApplication;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +25,22 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        CompanyRegisterer::class => [
+            NewCompanyRegister::class,
+        ],
+
+        EmployeeAppliedToJob::class => [
+            NewEmployeeApplication::class,
+        ],
+
+        EmployeeAccepted::class => [
+            JobStatusAccepted::class,
+        ],
+
+        EmployeeRejected::class => [
+            EmployeeJobRejected::class,
         ],
     ];
 

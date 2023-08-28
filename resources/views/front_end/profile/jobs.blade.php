@@ -19,7 +19,7 @@
                                 'badge-danger' => $job->pivot->status == 'rejected',
                             ])>{{ $job->pivot->status }}</span>
                             <a href="{{ route('jobs.show', $job) }}" class="btn btn-primary mr-2">Show</a>
-                            <a href="{{ route('applications.cancel', $job) }}" class="btn btn-danger">Cancel</a>
+                            <a href="{{ route('profile.applications.cancel', $job) }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>
                 </li>

@@ -7,6 +7,7 @@ use App\Traits\UploadFile;
 use Illuminate\Http\Request;
 use App\Models\Admin\Industry;
 use App\Models\Admin\Location;
+use App\Events\CompanyRegisterer;
 use App\Models\Admin\CompanySize;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\StoreCompanyRequest;
@@ -26,7 +27,8 @@ class RegisterCompanyController extends Controller
     public function store(StoreCompanyRequest $request)
     {
         $image_name = $this->uploadFile(User::UPLOADED_IMAGE, $request->image);
-        User::create(['image' => $image_name, 'role' => 'company'] + $request->validated())->company()->create($request->validated());
+        $company =  User::create(['image' => $image_name, 'role' => 'company'] + $request->validated())->company()->create($request->validated());
+        event(new CompanyRegisterer($company));
         toast('You Have Registered Successfully, You Can Login Now', 'success');
         return redirect()->route('login');
     }

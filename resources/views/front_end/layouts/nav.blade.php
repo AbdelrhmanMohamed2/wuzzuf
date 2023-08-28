@@ -22,7 +22,7 @@
                 @endcompany
 
                 @employee
-                <x-frontend.nav-item route="jobs.recommended_jobs" label='Recommended Jobs'></x-frontend.nav-item>
+                    <x-frontend.nav-item route="jobs.recommended_jobs" label='Recommended Jobs'></x-frontend.nav-item>
                     <x-frontend.nav-item route="profile.index" label='Profile'></x-frontend.nav-item>
                 @endemployee
 
@@ -32,6 +32,14 @@
                 @endguest
 
                 @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <i class="far fa-bell"></i>
+                            <span class="badge badge-danger navbar-badge" id="notification-number">0</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="notifications_box">
+                        </div>
+                    </li>
                     <li class="nav-item pt-2">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

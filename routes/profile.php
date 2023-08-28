@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\Frontend\Company\CandidateController;
-use App\Http\Controllers\Frontend\Company\CompanyProfileController;
-use App\Http\Controllers\Frontend\Company\JobCandidateController;
-use App\Http\Controllers\Frontend\Company\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProfileController;
+use App\Http\Controllers\Frontend\ApplyJobController;
+use App\Http\Controllers\Frontend\Company\JobController;
+use App\Http\Controllers\Frontend\Company\CandidateController;
+use App\Http\Controllers\Frontend\Company\JobCandidateController;
+use App\Http\Controllers\Frontend\Company\CompanyProfileController;
 use App\Http\Controllers\Frontend\Employee\EmployeeSkillController;
 use App\Http\Controllers\Frontend\Employee\EmployeeProfileController;
+use App\Http\Controllers\Frontend\Employee\EmployeeLanguageController;
 use App\Http\Controllers\Frontend\Employee\EmployeeEducationController;
 use App\Http\Controllers\Frontend\Employee\EmployeeExperienceController;
-use App\Http\Controllers\Frontend\Employee\EmployeeLanguageController;
 
 
 Route::middleware('auth')->prefix('profile')->name('profile.')->group(function () {
@@ -21,6 +22,12 @@ Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (
     });
 
     Route::middleware(['employee'])->group(function () {
+
+        Route::prefix('applications')->name('applications.')->controller(ApplyJobController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{job}', 'apply')->name('apply');
+            Route::get('/{job}/cancel', 'cancel')->name('cancel');
+        });
 
         Route::controller(EmployeeProfileController::class)->group(function () {
             Route::put('/', 'update')->name('update');
@@ -72,7 +79,8 @@ Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (
 
             Route::controller(JobCandidateController::class)->middleware('companyJob')->name('candidates.')->group(function () {
                 Route::get('/{job}/candidates', 'index')->name('index');
-                Route::get('/{job}/candidates/{employee}/accept', 'accept')->name('accept');
+                Route::get('/{job}/candidates/{employee}/accept', 'acceptPage')->name('accept');
+                Route::post('/{job}/candidates/{employee}/accept', 'accept')->name('accept.store');
                 Route::get('/{job}/candidates/{employee}/reject', 'reject')->name('reject');
             });
 
